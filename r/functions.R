@@ -9,25 +9,6 @@ gmax <- function(b, m, d, s) {
   set_units(b * m * d * sqrt(s), mol / m ^ 2 / s)
 }
 
-# Calculate D_w as a function temperature and pressure
-get_Dw <- function(D_0, Temp, eT, P) {
-  
-  D_0 %<>%
-    set_units(m ^ 2 / s) %>%
-    drop_units()
-  
-  Temp %<>%
-    set_units(K) %>%
-    drop_units()
-  
-  P %<>%
-    set_units(kPa) %>%
-    drop_units()
-  
-  set_units(D_0 * (Temp / 273.15) ^ eT * (101.3246 / P), m ^ 2 / s)
-  
-}
-
 # Functions for converting from D to U, R to S ----
 D2U <- function(D) {
 

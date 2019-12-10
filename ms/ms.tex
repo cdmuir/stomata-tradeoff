@@ -1,0 +1,1264 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is just an example/guide for you to refer to when submitting manuscripts to Frontiers, it is not mandatory to use Frontiers .cls files nor frontiers.tex  %
+% This will only generate the Manuscript, the final article will be typeset by Frontiers after acceptance.
+%                                              %
+%                                                                                                                                                         %
+% When submitting your files, remember to upload this *tex file, the pdf generated with it, the *bib file (if bibliography is not within the *tex) and all the figures.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Version 3.4 Generated 2018/06/15 %%%
+%%% You will need to have the following packages installed: datetime, fmtcount, etoolbox, fcprefix, which are normally inlcuded in WinEdt. %%%
+%%% In http://www.ctan.org/ you can find the packages and how to install them, if necessary. %%%
+
+\documentclass[utf8]{frontiersSCNS}
+
+%\setcitestyle{square} % for Physics and Applied Mathematics and Statistics articles
+\usepackage{url,hyperref,lineno,microtype,subcaption}
+\usepackage[onehalfspacing]{setspace}
+
+\linenumbers
+
+
+% BELOW TAKEN FROM rticles plos template
+%
+% amsmath package, useful for mathematical formulas
+\usepackage{amsmath}
+% amssymb package, useful for mathematical symbols
+\usepackage{amssymb}
+
+% hyperref package, useful for hyperlinks
+\usepackage{hyperref}
+
+% graphicx package, useful for including eps and pdf graphics
+% include graphics with the command \includegraphics
+\usepackage{graphicx}
+
+% Sweave(-like)
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
+\newenvironment{Schunk}{}{}
+\DefineVerbatimEnvironment{Code}{Verbatim}{}
+\DefineVerbatimEnvironment{CodeInput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{}
+\newenvironment{CodeChunk}{}{}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+\usepackage{color}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Below is from frontiers
+%
+\bibliographystyle{frontiersinSCNS}
+% Use doublespacing - comment out for single spacing
+%\usepackage{setspace}
+%\doublespacing
+
+
+% Leave a blank line between paragraphs instead of using \\
+
+
+\def\keyFont{\fontsize{8}{11}\helveticabold }
+
+
+%% ** EDIT HERE **
+%% PLEASE INCLUDE ALL MACROS BELOW
+
+%% END MACROS SECTION
+
+\usepackage{longtable}
+\usepackage{tikz}
+
+% short-cut for fs, gmax, and gop
+\newcommand{\fs}{$f_\text{S}$}
+\newcommand{\gsmax}{$g_\text{s,max}$}
+\newcommand{\gsop}{$g_\text{s,op}$}
+
+
+\def\Authors{
+  Christopher D. Muir\,\textsuperscript{1*}}
+
+\def\Address{
+
+  \textsuperscript{1} School of Life Sciences, University of Hawaii,  Honolulu,  Hawaii,  USA
+  }
+
+  \def\corrAuthor{Christopher D. Muir}\def\corrAddress{,  }\def\corrEmail{\href{mailto:cdmuir@hawaii.edu}{\nolinkurl{cdmuir@hawaii.edu}}}
+  \def\firstAuthorLast{Muir {et~al.}}
+
+
+\begin{document}
+\onecolumn
+\firstpage{1}
+
+\title[Stomata tradeoff photosynthesis for defense]{A stomatal model of anatomical tradeoffs between photosynthesis and
+pathogen defense}
+\author[\firstAuthorLast]{\Authors}
+\address{} %This field will be automatically populated
+\correspondance{} %This field will be automatically populated
+
+\extraAuth{}% If there are more than 1 corresponding author, comment this line and uncomment the next one.
+%\extraAuth{corresponding Author2 \\ Laboratory X2, Institute X2, Department X2, Organization X2, Street X2, City X2 , State XX2 (only USA, Canada and Australia), Zip Code2, X2 Country X2, email2@uni2.edu}
+
+
+\maketitle
+
+\begin{abstract}
+
+Stomatal pores control both leaf gas exchange and are an entry for many plant pathogens, setting up the potential for tradeoffs between photosynthesis and defense. To prevent colonization and limit infection, plants close their stomata after recognizing pathogens. In addition to closing stomata, anatmoical shifts to lower stomatal density and/or size may also limit pathogen colonization, but such developmental changes would permanently reduce the gas exchange capacity for the life of the leaf. I developed and analyzed a spatially explicit model of pathogen colonization on the leaf as a function of stomatal size and density, anatomical traits which determine maximum rates of gas exchange. The model predicts greater stomatal size or density increases colonization, but the effect is most pronounced when stomatal cover is low. I also derived scaling relationships between stomatal size and density that preserves a given probability of colonization. These scaling relationships set up a potential conflict between maximizing defense and minimizing stomatal cover. To my knowledge, this is the first mathematical model connecting gas exchange and pathogen defense via stomatal anatomy. It makes predictions that can be tested with experiments and may explain variation in stomatal anatomy among plants. The model is generalizable to many types of pathogens, but lacks significant biological realism that may be needed for accurate predictions.
+
+\tiny
+ \keyFont{ \section{Keywords:} anatomy, leaf gas exchange, model, pathogen, photosynthesis, scaling, stomata, tradeoff } 
+
+\end{abstract}
+
+\hypertarget{introduction}{%
+\section*{Introduction}\label{introduction}}
+\addcontentsline{toc}{section}{Introduction}
+
+Stomata evolved to regulate gas exchange in and out of the leaf
+(Hetherington and Woodward, 2003; Berry et al., 2010; Chater et al.,
+2017), but many plant pathogens take advantage of these chinks in the
+leaf cuticular armor to infect prospective hosts (Zeng et al., 2010;
+McLachlan et al., 2014; Melotto et al., 2017). The density and size of
+stomata set the anatomical maximum rate of stomatal conductance to
+CO\(_2\) and water vapor (Brown and Escombe, 1900; Parlange and
+Waggoner, 1970; Franks and Farquhar, 2001; Franks and Beerling, 2009b;
+Lehmann and Or, 2015; Sack and Buckley, 2016; Harrison et al., 2019),
+but the pore area shrinks and expands in response to internal and
+external factors to regulate gas exchange dynamically (Buckley, 2019).
+Many plant pathogens, including viruses (Murray et al., 2016), bacteria
+(Melotto et al., 2006; Underwood et al., 2007), protists (Fawke et al.,
+2015), and fungi (Hoch et al., 1987; Zeng et al., 2010) use stomatal
+pores to gain entry into the leaf. Since stomatal conductance is a major
+limitation on photosynthesis (Farquhar and Sharkey, 1982; Jones, 1985)
+while pathogens reduce fitness, this sets up a potential tradeoff
+between increased photosynthesis and defense against pathogens. Although
+there have been many empirical studies on the effect that pathogens have
+on stomata, there is no theoretical framework in which to place these
+findings. Lack of a theoreatical framework makes it difficult to answer
+general questions about how selection for pathogen defense constrains
+maximum rates of gas exchange.
+
+Stomatal anatomy is the key link between gas exchange and pathogen
+colonization. The density and size of stomata not only determines the
+theoretical maximum stomatal conductance (\gsmax), but is also
+proportional to the operational stomatal conductance (\gsop) in many
+circumstances (Franks et al., 2009, 2014; Dow et al., 2014a; McElwain et
+al., 2016; Murray et al., 2019). Therefore, I use anatomical \gsmax{} as
+a proxy for \gsop{} and do not address dynamic changes in stomatal
+aperture (see \protect\hyperlink{discussion}{Discussion}). Harrison et
+al. (2019) recently reviewed the relationship between stomatal anatomy
+and gas exchange in detail.
+
+Many pathogens rely on stomata to gain entry into the leaf, but it is
+unclear how anatomical traits that determine \gsmax{} (size and density)
+affect the ability of pathogens to colonize leaves. The impact of
+pathogens on host fitness is complex, but after a pathogen reaches a
+host, the first major step is colonization. Once infected, a pathogen
+can reduce fitness. Susceptible hosts can lose much of their biomass or
+die, but even resistant hosts must allocate resources to defense or
+reduce photosynthesis because of necrosis around sites of infection.
+Plants can limit colonization physiologically by closing stomata after
+they recognize pathogens, called stomatal defense (Melotto et al.,
+2017). Anatomy may be another layer of defense; plants can reduce
+pathogen colonization by developing leaves with lower stomatal density
+and/or size. Infection increases in leaves with higher stomatal density
+(McKown et al., 2014; Tateda et al., 2019; Dutton et al., 2019; Fetter
+et al., 2019), which suggests that both anatomical and physiological
+responses (stomatal closure) affect host colonization. By the same
+logic, if stomatal density were held constant, larger stomata should
+also increase colonization because they occupy more area. One key
+difference between physiological and anatomical defenses is that
+stomatal closure reduces gas exchange transiently, whereas anatomy
+constrains gas exchange throught the life of the leaf. Because we do not
+understand the relationship between stomatal anatomy and colonization
+well, we cannot predict the relationship between \gsmax{} and infection.
+
+If stomatal size and density affect pathogen colonization, selection to
+limit colonization may shape stomatal size-density scaling
+relationships. Botanists have long recognized that stomatal size and
+density are inversely correlated (Weiss, 1865; Tichá, 1982; Hetherington
+and Woodward, 2003; Sack et al., 2003; Franks and Beerling, 2009a;
+Brodribb et al., 2013; de Boer et al., 2016), but the evolutionary
+origin of this relationship is not yet known. Here I argue that
+pathogens could shape selection on this relationship. Explanations for
+inverse size-density scaling are usually cast in terms of preserving
+\gsmax{} and/or total epidermal area allocated to stomata (\fs; de Boer
+et al., 2016) because there are many combinations of stomatal size and
+density that have same \gsmax{} or same \fs{}:
+
+\begin{align}
+  g_\text{s,max} & = b m D S ^ {0.5} \label{eq:gsmax} \\
+  f_\text{S} & = D S \label{eq:fs}.
+\end{align}
+
+\(b\) and \(m\) are assumed to be biophysical and morphological
+constants, \emph{sensu} Sack and Buckley (2016) (see
+\protect\hyperlink{supplementary-material}{Supplementary Material}). If
+size and density also affect pathogen colonization, then selection from
+foliar pathogens could significantly alter the size-density scaling
+relationship. The empirical size-density scaling relationship is linear
+on a log-log scale, determined by an intercept \(\alpha\) and slope
+\(\beta\):
+
+\begin{align}
+  D & = e ^ \alpha S ^ {-\beta}; \\
+  d & = \alpha - \beta S.
+\end{align}
+
+For brevity, \(d = \text{log}(D)\) and \(s = \text{log}(S)\).
+Rearranging Equations \ref{eq:gsmax} and \ref{eq:fs}, a scaling
+relationship where \(\beta = 0.5\) preserves \gsmax{} while
+\(\beta = 1\) preserves \fs.
+
+How would adding pathogens alter these predicted scaling relationships?
+For simplicity, imagine two environments, one without foliar pathogens
+and one with lots. In the absence of foliar pathogens, we expect
+size-density scaling to preserve \gsmax{}, \fs{}, or some least-cost
+combination of them. What happens when we introduce pathogens? Assuming
+that stomatal size and density increase pathogen colonization, then
+selection will favor reduced size and/or density. This would change the
+intercept \(\alpha\) but not the slope. The effect of foliar pathogens
+on the slope depends on the relationship between size, density, and
+probability of colonization. If the probability of colonization is
+proportional to the product of \emph{linear} stomatal size
+(\(S ^ {0.5}\)) and density (\(\propto D S ^ {0.5}\) as for \gsmax) then
+it has the same effect on the slope as \gsmax{} because there are many
+combinations of \(D\) and \(S ^ {0.5}\) that have same probability of
+colonization. If the probability of colonization is proportional to the
+product of \emph{areal} stomatal size (\(S\)) and density
+(\(\propto D S\) as for \fs) then it has the same effect on the slope as
+\fs{} because there are many combinations of \(D\) and \(S\) that have
+same probability of colonization. Alternatively, the probability of
+colonization may have a different scaling relationsip (neither 0.5 nor
+1) or may be nonlinear on a log-log scale. Unlike \gsmax{} and \fs{}, we
+do not have theory to predict a stomatal size-density relationship that
+preserves the probability of colonization.
+
+In summary, the physical relationship between stomatal size, density,
+and conductance is well established (Harrison et al., 2019). The same
+traits likely affect the probability of pathogen colonization, but we do
+not have a theoretical model that makes quantitative predictions. The
+inverse stomatal size-density relationship has usually been explained in
+terms of preserving stomatal conductance and/or stomatal cover, but
+selection by pathogens might alter scaling. To address these gaps, the
+goals of this study are to 1) introduce a spatially explicit model
+pathogen colonization on the leaf surface; 2) use the model to predict
+the relationship between \gsmax, \fs{}, and the probability of
+colonization; 3) work out what these relationships predict about
+stomatal size-density scaling.
+
+\hypertarget{model}{%
+\section*{Model}\label{model}}
+\addcontentsline{toc}{section}{Model}
+
+In this section, I introduce a spatially explicit model of pathogen
+colonization on a leaf surface. I explain the model structure and
+assumptions here; the
+\protect\hyperlink{materials-and-methods}{Materials and Methods} section
+below describes how I analyzed the model to address the goals of the
+study. For generality, I refer to a generic ``pathogen'' that lands on
+leaf and moves to a stomate. The model is agnostic to the type of
+pathogen (virus, bacterium, fungus, etc.) and the specific biological
+details of how it moves (biotrophy). For example, motile bacterial cells
+can land and move around where fungi may germinate from a cyst and grow
+until they form an appresorium for infection. These very different
+biotropic movements on the leaf are treated identically here. I used
+Sympy version 1.3 (Meurer et al., 2017) for symbolic derivations.
+
+\textbf{Table 1} \textbar{} Glossary of mathematical symbols. The
+columns indicate the mathematical Symbol used in the paper, the
+associated symbol used in R scripts, scientific Units, and a verbal
+Description.
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+\begin{minipage}[b]{0.09\columnwidth}\raggedright
+Symbol\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+R\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+Units\strut
+\end{minipage} & \begin{minipage}[b]{0.61\columnwidth}\raggedright
+Description\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(D,d\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{D,\ d}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\textrm{mm}^{-2}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+stomatal density (\(d = \text{log}~D\))\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(f_s\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{f\_s}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+none\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+stomatal cover (\(f_s = D S\))\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(g_\text{s,max}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{g\_smax}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\text{mol}~\text{m}^{-2}~\text{s}^{-1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+anatomical maximum stomatal conductance\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(g_\text{s,op}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{g\_sop}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\text{mol}~\text{m}^{-2}~\text{s}^{-1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+operational stomatal conductance\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(H\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{H}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\mu\textrm{m} ^{-1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+death rate of pathogen on leaf surface\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(R\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{R}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\mu\textrm{m}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+stomatal radius (\(S = 2 \pi R ^ 2\))\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(S,s\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{S,\ s}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\mu\textrm{m}^2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+stomatal size (\(s = \text{log}~S\))\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\theta_i\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{theta\_i}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+radians\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+angles between pathogen (\(x_p,y_p\)) and lines tangent to the
+circumfrence of stomate \(i\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(U\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{U}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\mu\textrm{m}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+interstomatal distance\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(v_i\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{v\_i}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\mu\textrm{m}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+distance between pathogen (\(x_p,y_p\)) and stomate \(i\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(x_i,y_i\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{x\_i,y\_i}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\mu\textrm{m}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+position of stomate \(i\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(x_p,y_p\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\texttt{x\_p,y\_p}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\(\mu\textrm{m}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.61\columnwidth}\raggedright
+starting position of pathogen\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{spatial-representation-of-stomata}{%
+\subsection*{Spatial representation of
+stomata}\label{spatial-representation-of-stomata}}
+\addcontentsline{toc}{subsection}{Spatial representation of stomata}
+
+Stomata develop relatively equal spacing to minimize resistance to
+lateral diffusion (Morison et al., 2005), allow space between stomata
+(Dow et al., 2014b), and prevent stomatal interference (Lehmann and Or,
+2015). Here I assume that stomata are arrayed in an equilateral
+triangular grid with a density \(D\) and size (area) \(S\). This
+assumption ignores veins, trichomes, and within-leaf variation in
+stomatal density. Stomata are therefore arrayed in an evenly spaced grid
+(Figure \ref{fig:fig1}a). The interstomatal distance \(U\), measured as
+the distance from the center of one stomata to the next, is the maximal
+diagonal of the hexagon in \(\mu\textrm{m}\) that forms an equal area
+boundary between neighbording stomata. The area of a hexagon is
+\(A_\textrm{hexagon} = \frac{\sqrt{3}}{2} U ^ 2\). By definition the
+stomatal density is the inverse of this area, such that
+\(D = A^{-1}_\textrm{hexagon} = \frac{2}{\sqrt{3}} U ^ {-2}\).
+Therefore, interstomatal distance can be derived from the stomatal
+density as:
+
+\[ D = \frac{2}{\sqrt{3}} U ^{-2} \]
+\[ U = \bigg(\frac{2}{\sqrt{3}} D ^{-1}\bigg) ^ {0.5} \]
+
+For example, if the density is
+\(D = 10 ^ 2~\textrm{mm}^{-2} = 10 ^ {-4}~\mu\textrm{m}^{-2}\), then
+\(U\) is 107.5 \(\mu \textrm{m}\). Parkhurst (1994) described this
+result previously. I also make the simplifying assumption that stomata
+are perfectly circular with radius \(R\). This may be approximately true
+for fully open stomata with kidney-shaped guard cells. Although I assume
+stomata are circular here, in calculating \gsmax, I assume typical
+allometric relationships between length, width, and pore area (see
+\protect\hyperlink{supplementary-material}{Supplementary Material}).
+
+\begin{figure}
+  \centering
+    \includegraphics[width=6.5in]{../figures/fig1.jpeg}
+    \caption{\textbf{A spatially explicit model of stomatal anatomy and pathogen colonization}. \textbf{a}. Stomata are assumed to be in a homogenous equilateral triangular grid, which means that we can extrapolate from \textbf{b.} a focal triangle to the entire leaf. The circles represent idealized stomata; the grey lines between them are for visualization. \textbf{c.} By symmetry, a single focal region within the focal triangle can be modeled and extrapolated to the rest of the area. \textbf{d.} The model assumes that a pathogen, depicted as a grey rod, lands somewhere on the leaf surface and will sucessfully locate a stomate if it moves at the correct angle, depicted by the grey polygons.}
+    \label{fig:fig1}
+\end{figure}
+
+\hypertarget{spatial-representation-of-pathogen-search}{%
+\subsection*{Spatial representation of pathogen
+search}\label{spatial-representation-of-pathogen-search}}
+\addcontentsline{toc}{subsection}{Spatial representation of pathogen
+search}
+
+Now imagine that a pathogen lands at a uniform random position within
+the focal region and must arrive at a stomate to colonize. If it lands
+on a stomate, then it infects the leaf with probability 1; if it lands
+between stomata, then it infects the leaf with probability
+\(p_\text{locate}\). This is the probability that it locates a stomate,
+which I will derive below. The probabilities of landing on or between a
+stomate are \fs{} and \(1 - f_S\), respectively. Hence, the total
+probability of colonization is:
+
+\begin{equation}
+  \label{eq:p_colonize}
+  p_\text{colonize} = f_\text{S} + (1 - f_\text{S}) p_\text{locate}.
+\end{equation}
+
+I assume that the pathogen cannot sense where stomata are and orients at
+random, thereafter traveling in that direction. If it successfully
+locates a stomate, it colonizes the leaf, but otherwise does not infect.
+If there is a high density of stomata and/or large stomata, the
+probability of locating a stomate increases. By assuming that stomata
+form an equilateral triangular grid (see above), we can extrapolate what
+happens in a focal triangle (Figure \ref{fig:fig1}b) by symmetry.
+Further, since an equilateral triangle can be broken up into six
+identical units (Figure \ref{fig:fig1}c), we can simply calculate
+\(p_\text{locate}\) in this focal area. This implicitly assumes that the
+probability of colonzing stomata outside the focal area is 0 because
+they are too far away.
+
+Imagine that the pathogens lands in position (\(x_p,y_p\)) within the
+triangle. The centroid of the triangle is at position (\(x_c,y_c\)) and
+a reference stomate is at position \((0,0)\) (Figure \ref{fig:fig2}a).
+Therefore \(x_c = U / 2\) and \(y_c = \sqrt{3} U / 6\). The other
+stomata are at positions \((U/2, \sqrt{3} U /2)\) and \((U,0)\) (Figure
+\ref{fig:fig2}). \(x_p\) and \(y_p\) are defined as the horizontal and
+vertical distances, respectively, from the pathogen to the reference
+stomate at position \((0,0)\).
+
+Given that the pathogen starts at position (\(x_p,y_p\)), what's the
+probability of contacting one of the stomata at the vertices of the
+focal triangle? I assume the probability of contacting a stomate is
+equal to the proportion of angular directions that lead to a stomate
+(Figure \ref{fig:fig1}d). I solved this by finding the angles
+(\(\theta_1, \theta_2, \theta_3\)) between lines that are tangent to the
+outside of the three stomata and pass through (\(x_p,y_p\)) (Figure
+\ref{fig:fig2}a). If stomate \(i\) is centered at (\(x_i,y_i\)), the two
+slopes of tangency as function of pathogen position are:
+
+\begin{align}
+  t_{i,1}(x_p,y_p) & = \frac{-R e_{i,2}(x_p,y_p) + e_{i,3}(x_p,y_p)}{e_{i,1}(x_p,y_p)} \\
+  t_{i,2}(x_p,y_p) & = \frac{R e_{i,2}(x_p,y_p) + e_{i,3}(x_p,y_p)}{e_{i,1}(x_p,y_p)}
+\end{align}
+
+where
+
+\begin{align}
+  e_{i,1}(x_p,y_p) & = (R^2 - x_i^2 + 2 x_i x_p - x_p^2), \\
+  e_{i,2}(x_p,y_p) & = \sqrt{-e_{i,1} + (y_i - y_p) ^ 2}, \\
+  e_{i,3}(x_p,y_p) & = - x_i y_i + x_i y_p + x_p y_i - x_p y_p.
+\end{align}
+
+Note that \(i \in \{1, 2, 3\}\), indexing the three stomata in the focal
+triangle. The angle in radians between \(t_{i,1}(x_p,y_p)\) and
+\(t_{i,2}(x_p,y_p)\) is:
+
+\begin{equation}
+  \theta_i(x_p,y_p) = \text{arctan}\bigg(\frac{t_{i,1}(x_p,y_p) - t_{i,2}(x_p,y_p)}{1 + (t_{i,1}(x_p,y_p) t_{i,2}(x_p,y_p))}\bigg)
+\end{equation}
+
+\begin{figure}
+\centering
+\input{../figures/fig2.tex}
+\caption{\textbf{Spatial representation of stomata and pathogen.} \textbf{a.} The pathogen starts at a uniform random position within the focal region denoted ($x_p,y_p$). Within the focal triangle, the reference stomata is at position (0,0) by definition, and other stomatal positions are determined by the interstomatal distance $U$. \textbf{b.} Within the focal region, a pathogen can land within the stomate (white cirlce with grey outline and radius $R$) or in the grey area. The outer borders of this area are shown and depend on $R$ and $U$. For a given position $x$, there is a minimum $y$-value ($y_\text{min}$, dashed line) and maximum $y$-value ($y_\text{max}$, solid line).}
+\label{fig:fig2}
+\end{figure}
+
+I further assumed that the longer distance a pathogen must travel, the
+less likely it would be to locate a stomate. For example, if stomata are
+at very low density, then a pathogen may die before it reaches a stomate
+because of UV, dessication, or another factor. I included this effect by
+assuming the probability of reaching a stomate declines exponentially at
+rate \(H\) with the Euclidean distance \(v_i(x_p,y_p)\) between the
+pathogen location and the edge of stomata \(i\), which is distance \(R\)
+from its center at \(x_i,y_i\):
+
+\begin{equation}
+  v_i(x_p,y_p) = \sqrt{(x_i - x_p) ^ 2 + (y_i - y_p) ^ 2} - R.
+\end{equation}
+
+The probability of locating a stomate as a function of \(x_p\) and
+\(y_p\) (\(f_\text{locate}(x_p,y_p)\)) is the sum of the angles divided
+by \(2\pi\), discounted by their distance from the stomate:
+
+\begin{equation}
+  f_\text{locate}(x_p,y_p) = \frac{1}{2 \pi} \sum_{i=1}^3 e^{-H v_i(x_p,y_p)} \theta_i(x_p,y_p)
+\end{equation}
+
+When \(H = 0\), \(p_\text{locate}\) is the fraction of angles that lead
+from \((x_p,y_p)\) to a stomate. When \(H > 0\), \(p_\text{locate}\) is
+proportional to this fraction, but less than it depending on stomatal
+density, size, and starting location of the pathogen.
+
+To obtain the average \(p_\text{locate}\), we must integrate
+\(f_\text{locate}(x_p,y_p)\) over all possible starting positions
+\((x_p,y_p)\) within the focal area. The focal area is a 30-60-90
+triangle with vertices at the center of the reference stomate \((0,0)\),
+the midpoint of baseline \((U/2,0)\), and the centroid of the focal
+trinagle \((U/2, \sqrt{3} / 6 U)\) (Figure \ref{fig:fig1}c).
+Colonization occurs with probability 1 if the pathogen lands in the
+reference stomate, so we need to integrate the probability of
+colonization if it lands elsewhere. This region extends from the edge of
+the stomate, at \(\sqrt{3} / 2 R\) to \(U/2\) (Figure \ref{fig:fig2}b).
+At any \(x\), we integrate from the bottom of the focal area
+(\(y_\text{min}\)) to the top (\(y_\text{max}\)):
+
+\begin{align}
+  y_\text{min} = f(x) & = \begin{cases}
+    \sqrt{R ^ 2 - x ^ 2}, & \text{if } \frac{\sqrt{3}}{2} R < x < R \\ 
+    0, & \text{if } R \leq x \leq \frac{U}{2} \end{cases} \\
+  y_\text{max} = f(x) & = \frac{\sqrt{3}}{3} x
+\end{align}
+
+The integral is:
+
+\begin{equation}
+  p_\text{locate} = \frac{1}{a_\text{focal}}\int\limits_{\frac{\sqrt{3}}{2} R} ^ {U / 2} \int\limits_{y_\mathrm{min}} ^ {y_\mathrm{max}} f_\text{locate}(x, y) \,dx \,dy
+\end{equation}
+
+\(a_\text{focal}\) is the area of the focal region depicted in grey in
+Figure \ref{fig:fig2}b:
+
+\[ a_\text{focal} = \frac{U ^ 2}{8 \sqrt{3}} - \frac{\pi R ^ 2}{12} \]
+
+\hypertarget{materials-and-methods}{%
+\section*{Materials and Methods}\label{materials-and-methods}}
+\addcontentsline{toc}{section}{Materials and Methods}
+
+The \protect\hyperlink{model}{Model} calculates a probability of host
+colonization (Equation \ref{eq:p_colonize}) as a function stomatal
+density, size, and position of a pathogen on the leaf. I solved
+\(p_\text{colonize}\) using the \texttt{integral2()} function in the
+\textbf{pracma} package version 2.2.5 (Borchers, 2019) for numerical
+integration. I used R version 3.6.1 (R Core Team, 2019) for all analyses
+and wrote the paper in \textbf{rmarkdown} version 1.17 (Xie et al.,
+2018; Allaire et al., 2019). Source code is deposited on GitHub
+(\url{https://github.com/cdmuir/stomata-tradeoff}) and will be arcived
+on Zenodo upon publication.
+
+\hypertarget{what-is-the-relationship-between-stomatal-size-density-and-colonization}{%
+\subsection*{What is the relationship between stomatal size, density,
+and
+colonization?}\label{what-is-the-relationship-between-stomatal-size-density-and-colonization}}
+\addcontentsline{toc}{subsection}{What is the relationship between
+stomatal size, density, and colonization?}
+
+I calculated \(p_\text{colonize}\) over a biologically plausible grid of
+stomatal size and density for hypostomatous species based on de Boer et
+al. (2016). Stomatal density ranges from
+\(10^1 - 10^{3.5}~\text{mm}^{-2}\); stomatal size ranges from
+\(10^1 - 10^{3.5}~\mu\text{m}^2\). I only considered combinations of
+size and density where \fs{} was less than 1/3. For simplicity, I have
+not extended the current analysis to amphistomatous leaves. I crossed
+stomatal traits with three levels of \(H \in \{0, 0.01, 0.1\}\). When
+\(H = 0\), a pathogen perists indefinitely on the leaf surface.
+\(H = 0.01\) and \(H = 0.1\) correspond to low and high death rates,
+respectively. These values are not necessarily realistic, but illustrate
+qualitatively how a hostile environment on the leaf surface alters model
+predictions.
+
+\hypertarget{how-do-pathogens-alter-optimal-stomatal-size-density-scaling}{%
+\subsection*{How do pathogens alter optimal stomatal size-density
+scaling?}\label{how-do-pathogens-alter-optimal-stomatal-size-density-scaling}}
+\addcontentsline{toc}{subsection}{How do pathogens alter optimal
+stomatal size-density scaling?}
+
+The stomatal size-density scaling relationship can be explained in terms
+of preserving a constant \gsmax{} that is proportional to
+\(D S ^ {0.5}\) when \(bm\) is constant (Equation \ref{eq:gsmax}). In
+other words, there are infinitely many combinations of \(D\) and
+\(S ^ {0.5}\) with the same \gsmax. If \gsmax{} is held constant at
+\(C_g\), then the resulting size-density scaling relationship on a
+log-log scale is:
+
+\[ d = c_g - 0.5 s \] where lowercase variables are log-transformed
+equivalents of their uppercase counterparts. The scaling exponent
+\(\beta_g = 0.5\) preseves \(C_g\).
+
+Next, imagine there is similarly a scaling exponent \(\beta_p\) that
+preserves \(p_\text{colonize}\) for the product \(D S^{\beta_p}\). If
+\(\beta_p = 0.5\), then \(p_\text{colonize}\) is always proportional to
+\gsmax. If \(\beta_p > 0.5\), small, densely packed stomata would be
+better defended (lower \(p_\text{colonize}\)) compared to larger,
+sparsely spaced stomata with the same \gsmax. If \(\beta_p < 0.5\),
+small, densely packed stomata would be less defended (higher
+\(p_\text{colonize}\)) compared to larger, sparsely spaced stomata with
+the same \gsmax. I refer to the three outcomes (\(\beta_p = 0.5\),
+\(\beta_p < 0.5\), and \(\beta_p > 0.5\)) as iso-, hypo-, and
+hyper-conductance, respectively. I was unable to solve analytically for
+\(\beta_p\), so I numerically calculated isoclines of
+\(p_\text{colonize}\) over the grid of \(D\) and \(S\) values described
+in the preceding subsection. I numerically calculated the scaling
+relationships at a constant
+\(p_\text{colonize} \in \{0.025, 0.05, 0.1, 0.2, 0.4\}\) for
+\(H \in \{0, 0.01, 0.1\}\).
+
+\hypertarget{results}{%
+\section*{Results}\label{results}}
+\addcontentsline{toc}{section}{Results}
+
+I analyzed an idealized, spatially explicit
+\protect\hyperlink{model}{Model} of how a pathogen lands on a leaf and
+finds a stomate to colonize the leaf using a random search. To my
+knowledge, this is the first model that makes quantitative predictions
+about the relationship between stomatal anatomy, the probability of
+colonization, and their impact on stomatal size-density scaling.
+
+\hypertarget{nonlinear-relationships-between-colonization-stomatal-cover-and-conductance}{%
+\subsection*{Nonlinear relationships between colonization, stomatal
+cover, and
+conductance}\label{nonlinear-relationships-between-colonization-stomatal-cover-and-conductance}}
+\addcontentsline{toc}{subsection}{Nonlinear relationships between
+colonization, stomatal cover, and conductance}
+
+The probability of colonization (\(p_\text{colonize}\)) is not simply a
+one-to-one relationship between the fraction of epidermal area allocated
+to stomata (\fs). At low \fs, \(p_\text{colonize}\) increases faster
+rapdily relative to \fs{} at first Figure \ref{fig:fig3}a). At higher
+\fs, the \(p_\text{colonize}\) increases linearly with \fs. When
+\(H = 0\), any combination of stomatal size (\(S\)) and density (\(D\))
+with the same \fs{} have the same effect on \(p_\text{colonize}\). When
+\(H > 0\), pathogens are less likely to land close enough to a stomate
+to infect before dying, so \(p_\text{colonize}\) is closer to \fs{}
+(Figure \ref{fig:fig3}a). Furthermore, \(p_\text{colonize}\) depends on
+\(D\) and \(S\), not just \fs. For the same \fs, leaves with greater
+\(D\) have higher \(p_\text{colonize}\) (Figure \ref{fig:fig3}a).
+Holding \fs{} constant, leaves with lower \(D\) and higher \(S\) will
+have a greater distance (\(v_i\)) between a pathogen and its stomata.
+When \(H > 0\), this extra distance leads more pathogens to die before
+they can find a stomate. In contrast to \fs, \(p_\text{colonize}\)
+increases at a greater than linear rate with \gsmax. Greater \(D\)
+(smaller \(S\)) is associated with lower \(p_\text{colonize}\) when
+\gsmax{} is held constant (Figure \ref{fig:fig3}b). This happens because
+\(p_\text{colonize}\) increases approximately linearly with \(S\)
+whereas \gsmax{} is proportional to \(S^{0.5}\).
+
+\begin{figure}
+  \centering
+    \includegraphics{../figures/fig3.pdf}
+    \caption{\textbf{The probability of colonization increases with both stomatal cover and conductance} \textbf{a.} The probability of colonization ($p_\text{colonize}$, $y$-axis) initially increases rapidly with stomatal cover (\fs), then slows down to a linear relationship. Overall, $p_\text{colonize}$ is lower when pathogens can die on the leaf surface ($H > 0$). The relationship between \fs{} and $p_\text{colonize}$ is the same regardless of stomatal density when $H = 0$ (upper facet). When $H > 0$, higher density (solid lines) increase $p_\text{colonize}$ (lower facets). \textbf{b.} $p_\text{colonize}$ increases expoentially with \gsmax{} at all stomatal densities, but $p_\text{colonize}$ is much lower at higher densities for a given \gsmax. The relationship between \gsmax{} and $p_\text{colonize}$ is similar for all values of $H$.}
+    \label{fig:fig3}
+\end{figure}
+
+\hypertarget{hyper-conductance-size-density-scaling}{%
+\subsection*{Hyper-conductance size-density
+scaling}\label{hyper-conductance-size-density-scaling}}
+\addcontentsline{toc}{subsection}{Hyper-conductance size-density
+scaling}
+
+The scaling relationship between \(S\) and \(D\) that preserves
+\(p_\text{colonize}\) is always greater 0.5 (hyper-conductance), but
+usually less than 1. When \(H = 0\), the scaling relationship is
+essentially 1 (Figure \ref{fig:fig4}), which means that an increase
+\fs{} leads to a proportional increase in \(p_\text{colonize}\). Because
+the scaling relationship is greater than 0.5, leaves with greater
+stomatal density will have lower \(p_\text{colonize}\) than leaves lower
+stomatal density but the same \gsmax. In other words, increasing \(D\)
+and lowering \(S\) allows plants to reduce \(p_\text{colonize}\) while
+maintaining \gsmax. The scaling relationship is slightly less than 1,
+but still greater than 0.5, when \(H > 0\) (Figure \ref{fig:fig4}). In
+this area of parameter space, lower stomatal density can reduce \fs{}
+while \(p_\text{colonize}\) is constant, but this will still result in
+lower \gsmax.
+
+\begin{figure}
+  \centering
+    \includegraphics{../figures/fig4.pdf}
+    \caption{Log-log scaling relationships between stomatal density ($D$, \textit{x}-axis) and size ($S$, \textit{y}-axis) that preserve the probability of colonization ($p_\text{colonize}$). In each panel, solid lines indicate values of $D$ and $S$ where $p_\text{colonize}$ is 0.025 (lowest line), 0.05, 0.1, 0.2, or 0.4 (highest line). For reference, dashed grey lines show scaling relationships that preserve \fs{} ($\beta = 1$, $\text{slope} = - 1 / \beta = -1$) and \gsmax{} ($\beta = 0.5$, $\text{slope} = - 1 / \beta = -2$) drawn through the centroid of the plotting region. When the death rate on the leaf surface is low ($H = 0$), the scaling exponent is very close to $\beta = 1$. When $H > 0$, $0.5 < \beta < 1$ and is slightly nonlinear on a log-log scale.}
+    \label{fig:fig4}
+\end{figure}
+
+\hypertarget{discussion}{%
+\section*{Discussion}\label{discussion}}
+\addcontentsline{toc}{section}{Discussion}
+
+Stomatal density and size set the upper limit on gas exchange in leaves
+(Harrison et al., 2019) and is often closely related to operational
+stomatal conductance in nature (Murray et al., 2019). Despite the fact
+that many ecologically and economically significant plant pathogens
+infect through stomata, the relationship between stomatal anatomy and
+susceptibility to foliar pathogens is less clear than it is for gas
+exchange. To develop testable predictions, we need mathematical models
+that can clarify the potential for tradeoffs between stomatal
+conductance, stomatal cover, and disease resistance. I used a spatially
+explicit model of a pathogen searching for a stomate to colonize a host.
+From this \protect\hyperlink{model}{Model}, I derived predictions about
+the relationship between stomatal anatomy and disease resistance for the
+first time. The model predicts that the probability of colonization is
+not always proportional to the surface area of leaf covered by stomata
+(\fs), as one might intuitively predict. If the leaf surface is a
+hostile environment and pathogens have a limited time to search, lower
+stomatal density decreases the probability of colonization even if \fs{}
+is constant. However, \gsmax{} decreases proportionally more than the
+probability of colonization. The model reveals the potential for
+conflicting demands of maximizing disease resistance, minimizing
+stomatal cover, and maintaining stomatal conductance. Including the
+effect of anatomy on disease resistance therefore has the potential to
+change our understading of how stomatal size-density scaling evolves in
+land plants.
+
+The model predicts that in most cases, increasing stomatal cover should
+lead to a proportonal increase in susceptibility, which is the implicit
+assumption of some empirical studies (e.g.~McKown et al. (2014); Tateda
+et al. (2019); Dutton et al. (2019); Fetter et al. (2019)). It also
+makes new, testable predictions that are less intuitive. At very low
+\fs, there is a rapid increase in susceptibility (Figure
+\ref{fig:fig3}a). If there are no stomata, the probability of
+colonization is 0, so the first few stomata dramatically increase the
+probability. This is unlikely to be significant for abaxial (lower) leaf
+surfaces, which usually have most of the stomata (Salisbury, 1928;
+Metcalfe and Chalk, 1950; Mott et al., 1984; Peat and Fitter, 1994;
+Jordan et al., 2014; Muir, 2015; Bucher et al., 2017; Drake et al.,
+2019). However, many adaxial (upper) leaf surfaces have zero or very few
+stomata. Using adaxial leaf surfaces, it should be possible to test if
+small changes in stomatal size or density have a larger effect on
+disease susceptibility when \fs{} is low. The nonlinear increase in
+\(p_\text{colonize}\) is less apparent when \(H > 0\) (Figure
+\ref{fig:fig3}a). A more hostile microenvironment (e.g.~drier, higher
+UV) should therefore reduce the effect of increased size or density as
+low \fs. If true, the dimishing marginal effect of \fs{} on colonization
+could explain why stomatal ratio on the upper and lower surface is
+bimodal (Muir, 2015). The initial cost of adaxial (upper) stomata is
+high, but if the benefits outweigh the costs, then equal stomatal
+densities on each surface maximize CO\(_2\) supply for photosynthesis
+(Parkhurst, 1978; Gutschick, 1984; Parkhurst and Mott, 1990).
+
+An effect of stomatal size and density on susceptibility to foliar
+pathogens could change our understanding of stomatal size-density
+scaling. Since allocating leaf epidermis to stomata may be costly
+(Franks and Farquhar, 2007; Assmann and Zeiger, 1987; Dow et al., 2014b;
+Lehmann and Or, 2015; Baresch et al., 2019), selection should favor
+leaves that achieve a desired \gsmax{} while minimizing \fs{} (de Boer
+et al., 2016). Because of their different scaling exponents (Equation
+\ref{eq:gsmax}, \ref{eq:fs}), smaller, densely packed stomata can
+achieve the same \gsmax{} at minimum \fs. However, many leaves have
+larger, sparsely packed stomata. Incorporating susceptibility to disease
+may explain why. If pathogens have a limited time to find stomata before
+dying (\(H > 0\)), then the scaling exponent between size and density
+that keeps \(p_\text{colonize}\) constant is between 0.5 and 1, the
+scaling exponents for \gsmax{} and \fs, respectively (Figure
+\ref{fig:fig4}). Greater density of smaller stomata can increase
+\gsmax{} while keeping \(p_\text{colonize}\) constant, but this will
+increase \fs. Conversely, \fs{} could decrease while keeping
+\(p_\text{colonize}\) constant, but this will decrease \gsmax. This sets
+up the potential for conflict between competing goals. The optimal
+stomatal size and density will therefore depend on the precise costs and
+benefits of infection, stomatal conductance, and stomatal cover. This
+may explain why many leaves have large, sparsely packed stomata despite
+the fact that they could achieve the same \gsmax{} and lower \fs{} with
+smaller, more densely packed stomata.
+
+The model examines the probability of colonization for a single
+pathogen. The calculated probabilities of colonization should not be
+interpreted as exact predictions, but rather as depicting qualitative
+relationships between stomatal anatomy and infection severity. The model
+is most applicable to diseases where the host has some resistance. The
+energetic cost and lost photosynthetic capacity (closed stomata,
+necrosis, etc.) of dealing with a pathogen is assumed to be proportional
+to the amount of infection. The actual fitness cost will be modulated by
+the number of pathogens landing on the leaf and the cost of infection.
+In environments with fewer or less virulent pathogens, the fitness cost
+of infection will be less than in environments with more abundant,
+virulent pathogens. The model is less relevant to very susceptible host
+plants that can be severely damaged or killed by a small number of
+colonizations that spread unchecked throughout the host tissue.
+
+The purpose of this model is to provide a general foundation to examine
+the relationship between stomatal size, density, and defense against
+foliar pathogens. In its generality, it overlooks interesting natural
+history and biologically important features of specific plants and their
+pathogens. For example, some pathogens actively seek out and find
+stomata (Kiefer et al., 2002), whereas I assumed that pathogens randomly
+orient themselves on the leaf. Including sensing should increase the
+probability of colonization. I also assumed that the plant does not
+respond by, for example, closing stomata when it senses a pathogen.
+However, plants can sense and close stomata when pathogens land on the
+leaf, but pathogens can pry stomata back open (Melotto et al., 2006).
+Future work on specific plant-pathogen interactions could build on this
+model by adding more biological realism to provide more precise
+predictions.
+
+\hypertarget{conclusion}{%
+\section*{Conclusion}\label{conclusion}}
+\addcontentsline{toc}{section}{Conclusion}
+
+The model makes two non-intuitive predictions. First, the effect of
+increased stomatal density or size on susceptibility to foliar pathogens
+is greatest when stomatal cover is very low. Second, maximizing disease
+resistance sets up a potential conflict between minimizing stomatal
+cover and maximizing stomatal conductance. The first prediction may be
+relatively straightforward to test experimentally with adaxial (upper)
+stomata that occur at low and moderate densities within the same or
+closely related species (Muir et al., 2014; McKown et al., 2014; Fetter
+et al., 2019). The second prediction about size-density scaling is more
+complex because we would need to know the relationships between
+colonization, stomatal cover, stomatal conductance, and fitness in
+natural conditions. Testing these predictions in a variety of species
+would help determine whether pathogens have played an important role
+shaping stomatal anatomy in land plants.
+
+\hypertarget{funding}{%
+\section*{Funding}\label{funding}}
+\addcontentsline{toc}{section}{Funding}
+
+I am grateful startup funds from the University of Hawaii for supporting
+this work.
+
+\hypertarget{conflict-of-interest-statement}{%
+\section*{Conflict of Interest
+Statement}\label{conflict-of-interest-statement}}
+\addcontentsline{toc}{section}{Conflict of Interest Statement}
+
+The author declares that the research was conducted in the absence of
+any commercial or financial relationships that could be construed as a
+potential conflict of interest.
+
+\hypertarget{supplementary-material}{%
+\section*{Supplementary Material}\label{supplementary-material}}
+\addcontentsline{toc}{section}{Supplementary Material}
+
+I calculated \gsmax{} (Equation \ref{eq:gsmax}) to water vapor at a
+reference leaf temperature (\(T_\mathrm{leaf} = 25 ^ \circ\) C)
+following Sack and Buckley (2016). They defined a biophysical and
+morphological constant as:
+
+\begin{align*}
+  b = & D_\text{wv} / v \\
+  m = & \frac{\pi c ^ 2}{j ^ {0.5} (4 h j + \pi c)}
+\end{align*}
+
+\(b\) is the diffusion coefficient of water vapor in air
+(\(D_\text{wv}\)) divided by the kinematic viscosity of dry air (\(v\)).
+\(D_\text{wv} = 2.49 \times 10^{-5} ~ \text{m}^2 ~ \text{s}^{-1}\) and
+\(v = 2.24 \times 10 ^ {-2} ~ \text{m}^3 ~ \text{mol} ^ {-1}\) at
+\(25 ^ \circ\) (Monteith and Unsworth, 2013). For kidney-shaped guard
+cells, \(c = h = j = 0.5\).
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-allaire_rmarkdown:_2019}{}%
+Allaire, J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Wickham,
+H., Cheng, J., Chang, W., and Iannone, R. (2019). Rmarkdown: Dynamic
+Documents for R. Available at:
+\url{https://github.com/rstudio/rmarkdown}.
+
+\leavevmode\hypertarget{ref-assmann_guard_1987}{}%
+Assmann, S. M., and Zeiger, E. (1987). ``Guard Call Bioenergetics,'' in
+\emph{Stomatal Function}, eds. E. Zeiger, G. D. Farquhar, and I. R.
+Cowan (Stanford University Press), 163--193.
+
+\leavevmode\hypertarget{ref-baresch_competition_2019}{}%
+Baresch, A., Crifò, C., and Boyce, C. K. (2019). Competition for
+epidermal space in the evolution of leaves with high physiological
+rates. \emph{New Phytologist} 221, 628--639.
+doi:\href{https://doi.org/10.1111/nph.15476}{10.1111/nph.15476}.
+
+\leavevmode\hypertarget{ref-berry_stomata:_2010}{}%
+Berry, J. A., Beerling, D. J., and Franks, P. J. (2010). Stomata: Key
+players in the earth system, past and present. \emph{Current Opinion in
+Plant Biology} 13, 232--239.
+doi:\href{https://doi.org/10.1016/j.pbi.2010.04.013}{10.1016/j.pbi.2010.04.013}.
+
+\leavevmode\hypertarget{ref-borchers_pracma:_2019}{}%
+Borchers, H. W. (2019). Pracma: Practical Numerical Math Functions. R
+package version 2.2.5. Available at:
+\url{https://CRAN.R-project.org/package=pracma}.
+
+\leavevmode\hypertarget{ref-brodribb_unified_2013}{}%
+Brodribb, T. J., Jordan, G. J., and Carpenter, R. J. (2013). Unified
+changes in cell size permit coordinated leaf evolution. \emph{New
+Phytologist} 199, 559--570.
+doi:\href{https://doi.org/10.1111/nph.12300}{10.1111/nph.12300}.
+
+\leavevmode\hypertarget{ref-brown_static_1900}{}%
+Brown, H. T., and Escombe, F. (1900). Static diffusion of gases and
+liquids in relation to the assimilation of carbon and translocation in
+plants. \emph{Proceedings of the Royal Society of London} 67, 124--128.
+
+\leavevmode\hypertarget{ref-bucher_stomatal_2017}{}%
+Bucher, S. F., Auerswald, K., Grün-Wenzel, C., Higgins, S. I., Garcia
+Jorge, J., and Römermann, C. (2017). Stomatal traits relate to habitat
+preferences of herbaceous species in a temperate climate. \emph{Flora}
+229, 107--115.
+doi:\href{https://doi.org/10.1016/j.flora.2017.02.011}{10.1016/j.flora.2017.02.011}.
+
+\leavevmode\hypertarget{ref-buckley_how_2019}{}%
+Buckley, T. N. (2019). How do stomata respond to water status? \emph{New
+Phytologist} 224, 21--36.
+doi:\href{https://doi.org/10.1111/nph.15899}{10.1111/nph.15899}.
+
+\leavevmode\hypertarget{ref-chater_origins_2017}{}%
+Chater, C. C. C., Caine, R. S., Fleming, A. J., and Gray, J. E. (2017).
+Origins and Evolution of Stomatal Development. \emph{Plant Physiology}
+174, 624--638.
+doi:\href{https://doi.org/10.1104/pp.17.00183}{10.1104/pp.17.00183}.
+
+\leavevmode\hypertarget{ref-de_boer_optimal_2016}{}%
+de Boer, H. J., Price, C. A., Wagner-Cremer, F., Dekker, S. C., Franks,
+P. J., and Veneklaas, E. J. (2016). Optimal allocation of leaf epidermal
+area for gas exchange. \emph{New Phytologist} 210, 1219--1228.
+doi:\href{https://doi.org/10.1111/nph.13929}{10.1111/nph.13929}.
+
+\leavevmode\hypertarget{ref-dow_integrated_2014}{}%
+Dow, G. J., Bergmann, D. C., and Berry, J. A. (2014a). An integrated
+model of stomatal development and leaf physiology. \emph{New
+Phytologist} 201, 1218--1226.
+
+\leavevmode\hypertarget{ref-dow_physiological_2014}{}%
+Dow, G. J., Berry, J. A., and Bergmann, D. C. (2014b). The physiological
+importance of developmental mechanisms that enforce proper stomatal
+spacing in \emph{Arabidopsis thaliana}. \emph{New Phytologist} 201,
+1205--1217.
+doi:\href{https://doi.org/10.1111/nph.12586}{10.1111/nph.12586}.
+
+\leavevmode\hypertarget{ref-drake_two_2019}{}%
+Drake, P. L., Boer, H. J., Schymanski, S. J., and Veneklaas, E. J.
+(2019). Two sides to every leaf: Water and \textless span
+style="font-variant:Small-caps;"\textgreater CO\textless/span\textgreater{}
+\(_{\textrm{2}}\) transport in hypostomatous and amphistomatous leaves.
+\emph{New Phytologist} 222, 1179--1187.
+doi:\href{https://doi.org/10.1111/nph.15652}{10.1111/nph.15652}.
+
+\leavevmode\hypertarget{ref-dutton_bacterial_2019}{}%
+Dutton, C., Hõrak, H., Hepworth, C., Mitchell, A., Ton, J., Hunt, L.,
+and Gray, J. E. (2019). Bacterial infection systemically suppresses
+stomatal density. \emph{Plant, Cell \& Environment} 42, 2411--2421.
+doi:\href{https://doi.org/10.1111/pce.13570}{10.1111/pce.13570}.
+
+\leavevmode\hypertarget{ref-farquhar_stomatal_1982}{}%
+Farquhar, G. D., and Sharkey, T. D. (1982). Stomatal Conductance and
+Photosynthesis. \emph{Annual Review of Plant Physiology} 33, 317--345.
+doi:\href{https://doi.org/10.1146/annurev.pp.33.060182.001533}{10.1146/annurev.pp.33.060182.001533}.
+
+\leavevmode\hypertarget{ref-fawke_oomycete_2015}{}%
+Fawke, S., Doumane, M., and Schornack, S. (2015). Oomycete Interactions
+with Plants: Infection Strategies and Resistance Principles.
+\emph{Microbiology and Molecular Biology Reviews} 79, 263--280.
+doi:\href{https://doi.org/10.1128/MMBR.00010-15}{10.1128/MMBR.00010-15}.
+
+\leavevmode\hypertarget{ref-fetter_trade-offs_2019}{}%
+Fetter, K. C., Nelson, D. M., and Keller, S. R. (2019). Trade-offs and
+selection conflicts in hybrid poplars indicate the stomatal ratio as an
+important trait regulating disease resistance.
+doi:\href{https://doi.org/10.1101/814046}{10.1101/814046}.
+
+\leavevmode\hypertarget{ref-franks_co_2009}{}%
+Franks, P. J., and Beerling, D. J. (2009a). CO \(_{\textrm{2}}\) -forced
+evolution of plant gas exchange capacity and water-use efficiency over
+the Phanerozoic. \emph{Geobiology} 7, 227--236.
+doi:\href{https://doi.org/10.1111/j.1472-4669.2009.00193.x}{10.1111/j.1472-4669.2009.00193.x}.
+
+\leavevmode\hypertarget{ref-franks_maximum_2009}{}%
+Franks, P. J., and Beerling, D. J. (2009b). Maximum leaf conductance
+driven by CO\(_{\textrm{2}}\) effects on stomatal size and density over
+geologic time. \emph{Proceedings of the National Academy of Sciences}
+106, 10343--10347.
+
+\leavevmode\hypertarget{ref-franks_plasticity_2009}{}%
+Franks, P. J., Drake, P. L., and Beerling, D. J. (2009). Plasticity in
+maximum stomatal conductance constrained by negative correlation between
+stomatal size and density: An analysis using \emph{Eucalyptus globulus}.
+\emph{Plant, Cell \& Environment} 32, 1737--1748.
+doi:\href{https://doi.org/10.1111/j.1365-3040.2009.002031.x}{10.1111/j.1365-3040.2009.002031.x}.
+
+\leavevmode\hypertarget{ref-franks_effect_2001}{}%
+Franks, P. J., and Farquhar, G. D. (2001). The effect of exogenous
+abscisic acid on stomatal development, stomatal mechanics, and leaf gas
+exchange in \emph{Tradescantia virginiana}. \emph{Plant Physiology} 125,
+935--942.
+
+\leavevmode\hypertarget{ref-franks_mechanical_2007}{}%
+Franks, P. J., and Farquhar, G. D. (2007). The Mechanical Diversity of
+Stomata and Its Significance in Gas-Exchange Control. \emph{Plant
+Physiology} 143, 78--87.
+doi:\href{https://doi.org/10.1104/pp.106.089367}{10.1104/pp.106.089367}.
+
+\leavevmode\hypertarget{ref-franks_new_2014}{}%
+Franks, P. J., Royer, D. L., Beerling, D. J., Van de Water, P. K.,
+Cantrill, D. J., Barbour, M. M., and Berry, J. A. (2014). New
+constraints on atmospheric CO \(_{\textrm{2}}\) concentration for the
+Phanerozoic: Franks et al.: New constraints on Phanerozoic CO2.
+\emph{Geophysical Research Letters} 41, 4685--4694.
+doi:\href{https://doi.org/10.1002/2014GL060457}{10.1002/2014GL060457}.
+
+\leavevmode\hypertarget{ref-gutschick_photosynthesis_1984}{}%
+Gutschick, V. P. (1984). Photosynthesis model for C\(_{\textrm{3}}\)
+leaves incorporating CO\(_{\textrm{2}}\) transport, propagation of
+radiation, and biochemistry 1. Kinetics and their parameterization.
+\emph{Photosynthetica} 18, 549--568.
+
+\leavevmode\hypertarget{ref-harrison_influence_2019}{}%
+Harrison, E. L., Arce Cubas, L., Gray, J. E., and Hepworth, C. (2019).
+The influence of stomatal morphology and distribution on photosynthetic
+gas exchange. \emph{The Plant Journal}, tpj.14560.
+doi:\href{https://doi.org/10.1111/tpj.14560}{10.1111/tpj.14560}.
+
+\leavevmode\hypertarget{ref-hetherington_role_2003}{}%
+Hetherington, A. M., and Woodward, F. I. (2003). The role of stomata in
+sensing and driving environmental change. \emph{Nature} 424, 901--908.
+doi:\href{https://doi.org/10.1038/nature01843}{10.1038/nature01843}.
+
+\leavevmode\hypertarget{ref-hoch_signaling_1987}{}%
+Hoch, H. C., Staples, R. C., Whitehead, B., Comeau, J., and Wolf, E. D.
+(1987). Signaling for Growth Orientation and Cell Differentiation by
+Surface Topography in Uromyces. \emph{Science, New Series} 235,
+1659--1662. Available at: \url{http://www.jstor.org/stable/1698314}.
+
+\leavevmode\hypertarget{ref-jones_partitioning_1985}{}%
+Jones, H. G. (1985). Partitioning stomatal and non-stomatal limitations
+to photosynthesis. \emph{Plant, Cell \& Environment} 8, 95--104.
+doi:\href{https://doi.org/10.1111/j.1365-3040.1985.tb01227.x}{10.1111/j.1365-3040.1985.tb01227.x}.
+
+\leavevmode\hypertarget{ref-jordan_using_2014}{}%
+Jordan, G. J., Carpenter, R. J., and Brodribb, T. J. (2014). Using
+fossil leaves as evidence for open vegetation. \emph{Palaeogeography,
+Palaeoclimatology, Palaeoecology} 395, 168--175.
+doi:\href{https://doi.org/10.1016/j.palaeo.2013.12.035}{10.1016/j.palaeo.2013.12.035}.
+
+\leavevmode\hypertarget{ref-kiefer_host_2002}{}%
+Kiefer, B., Riemann, M., Büche, C., Kassemeyer, H.-H., and Nick, P.
+(2002). The host guides morphogenesis and stomatal targeting in the
+grapevine pathogen Plasmopara viticola. \emph{Planta} 215, 387--393.
+doi:\href{https://doi.org/10.1007/s00425-002-0760-2}{10.1007/s00425-002-0760-2}.
+
+\leavevmode\hypertarget{ref-lehmann_effects_2015}{}%
+Lehmann, P., and Or, D. (2015). Effects of stomata clustering on leaf
+gas exchange. \emph{New Phytologist} 207, 1015--1025.
+doi:\href{https://doi.org/10.1111/nph.13442}{10.1111/nph.13442}.
+
+\leavevmode\hypertarget{ref-mcelwain_using_2016}{}%
+McElwain, J. C., Yiotis, C., and Lawson, T. (2016). Using modern plant
+trait relationships between observed and theoretical maximum stomatal
+conductance and vein density to examine patterns of plant
+macroevolution. \emph{New Phytologist} 209, 94--103.
+doi:\href{https://doi.org/10.1111/nph.13579}{10.1111/nph.13579}.
+
+\leavevmode\hypertarget{ref-mckown_association_2014}{}%
+McKown, A. D., Guy, R. D., Quamme, L., Klápště, J., La Mantia, J.,
+Constabel, C. P., El-Kassaby, Y. A., Hamelin, R. C., Zifkin, M., and
+Azam, M. S. (2014). Association genetics, geography and ecophysiology
+link stomatal patterning in \emph{Populus trichocarpa} with carbon gain
+and disease resistance trade-offs. \emph{Molecular Ecology} 23,
+5771--5790.
+doi:\href{https://doi.org/10.1111/mec.12969}{10.1111/mec.12969}.
+
+\leavevmode\hypertarget{ref-mclachlan_gate_2014}{}%
+McLachlan, D. H., Kopischke, M., and Robatzek, S. (2014). Gate control:
+Guard cell regulation by microbial stress. \emph{New Phytologist} 203,
+1049--1063.
+doi:\href{https://doi.org/10.1111/nph.12916}{10.1111/nph.12916}.
+
+\leavevmode\hypertarget{ref-melotto_plant_2006}{}%
+Melotto, M., Underwood, W., Koczan, J., Nomura, K., and He, S. Y.
+(2006). Plant Stomata Function in Innate Immunity against Bacterial
+Invasion. \emph{Cell} 126, 969--980.
+doi:\href{https://doi.org/10.1016/j.cell.2006.06.054}{10.1016/j.cell.2006.06.054}.
+
+\leavevmode\hypertarget{ref-melotto_stomatal_2017}{}%
+Melotto, M., Zhang, L., Oblessuc, P. R., and He, S. Y. (2017). Stomatal
+Defense a Decade Later. \emph{Plant Physiology} 174, 561--571.
+doi:\href{https://doi.org/10.1104/pp.16.01853}{10.1104/pp.16.01853}.
+
+\leavevmode\hypertarget{ref-metcalfe_anatomy_1950}{}%
+Metcalfe, C. R., and Chalk, L. (1950). \emph{Anatomy of the
+dicotyledons, Vols. 1 \& 2}. First. Oxford: Oxford University Press.
+
+\leavevmode\hypertarget{ref-meurer_sympy:_2017}{}%
+Meurer, A., Smith, C. P., Paprocki, M., Čertík, O., Kirpichev, S. B.,
+Rocklin, M., Kumar, A., Ivanov, S., Moore, J. K., Singh, S., et al.
+(2017). SymPy: Symbolic computing in Python. \emph{PeerJ Computer
+Science} 3, e103.
+doi:\href{https://doi.org/10.7717/peerj-cs.103}{10.7717/peerj-cs.103}.
+
+\leavevmode\hypertarget{ref-monteith_principles_2013}{}%
+Monteith, J. L., and Unsworth, M. H. (2013). \emph{Principles of
+environmental physics: Plants, animals, and the atmosphere}. 4th ed.
+Amsterdam ; Boston: Elsevier/Academic Press.
+
+\leavevmode\hypertarget{ref-morison_lateral_2005}{}%
+Morison, J. I. L., Emily Gallouët, Lawson, T., Cornic, G., Herbin, R.,
+and work(s): N. R. B. R. (2005). Lateral Diffusion of CO₂ in Leaves Is
+Not Sufficient to Support Photosynthesis. \emph{Plant Physiology} 139,
+254--266. Available at: \url{http://www.jstor.org/stable/4281859}.
+
+\leavevmode\hypertarget{ref-mott_adaptive_1984}{}%
+Mott, K. A., Gibson, A. C., and O'Leary, J. W. (1984). The adaptive
+significance of amphistomatic leaves. \emph{Plant, Cell \& Environment}
+5, 455--460.
+
+\leavevmode\hypertarget{ref-muir_making_2015}{}%
+Muir, C. D. (2015). Making pore choices: Repeated regime shifts in
+stomatal ratio. \emph{Proceedings of the Royal Society B: Biological
+Sciences} 282, 20151498.
+doi:\href{https://doi.org/10.1098/rspb.2015.1498}{10.1098/rspb.2015.1498}.
+
+\leavevmode\hypertarget{ref-muir_morphological_2014}{}%
+Muir, C. D., Hangarter, R. P., Moyle, L. C., and Davis, P. A. (2014).
+Morphological and anatomical determinants of mesophyll conductance in
+wild relatives of tomato ( \emph{solanum} sect. \emph{Lycopersicon} ,
+sect. \emph{Lycopersicoides} ; Solanaceae). \emph{Plant, Cell \&
+Environment} 37, 1415--1426.
+doi:\href{https://doi.org/10.1111/pce.12245}{10.1111/pce.12245}.
+
+\leavevmode\hypertarget{ref-murray_consistent_2019}{}%
+Murray, M., Soh, W. K., Yiotis, C., Spicer, R. A., Lawson, T., and
+McElwain, J. C. (2019). Consistent relationship between field-measured
+stomatal conductance and theoretical maximum stomatal conductance in
+C\(_{\textrm{3}}\) woody angiosperms in four major biomes.
+\emph{International Journal of Plant Sciences}, 706260.
+doi:\href{https://doi.org/10.1086/706260}{10.1086/706260}.
+
+\leavevmode\hypertarget{ref-murray_plant_2016}{}%
+Murray, R. R., Emblow, M. S. M., Hetherington, A. M., and Foster, G. D.
+(2016). Plant virus infections control stomatal development.
+\emph{Scientific Reports} 6, 34507.
+doi:\href{https://doi.org/10.1038/srep34507}{10.1038/srep34507}.
+
+\leavevmode\hypertarget{ref-parkhurst_diffusion_1994}{}%
+Parkhurst, D. F. (1994). Diffusion of
+CO\textless sub\textgreater2\textless\textbackslash sub\textgreater{}
+and Other Gases Inside Leaves. \emph{New Phytologist} 126, 449--479.
+Available at: \url{http://www.jstor.org/stable/2557929}.
+
+\leavevmode\hypertarget{ref-parkhurst_adaptive_1978}{}%
+Parkhurst, D. F. (1978). The Adaptive Significance of Stomatal
+Occurrence on One or Both Surfaces of Leaves. \emph{The Journal of
+Ecology} 66, 367.
+doi:\href{https://doi.org/10.2307/2259142}{10.2307/2259142}.
+
+\leavevmode\hypertarget{ref-parkhurst_intercellular_1990}{}%
+Parkhurst, D. F., and Mott, K. A. (1990). Intercellular Diffusion Limits
+to CO \(_{\textrm{2}}\) Uptake in Leaves: Studies in Air and Helox.
+\emph{Plant Physiology} 94, 1024--1032.
+doi:\href{https://doi.org/10.1104/pp.94.3.1024}{10.1104/pp.94.3.1024}.
+
+\leavevmode\hypertarget{ref-parlange_stomatal_1970}{}%
+Parlange, J.-Y., and Waggoner, P. E. (1970). Stomatal Dimensions and
+Resistance to Diffusion. \emph{Plant Physiology} 46, 337--342.
+doi:\href{https://doi.org/10.1104/pp.46.2.337}{10.1104/pp.46.2.337}.
+
+\leavevmode\hypertarget{ref-peat_comparative_1994}{}%
+Peat, H. J., and Fitter, A. H. (1994). A comparative study of the
+distribution and density of stomata in the British flora.
+\emph{Biological Journal of the Linnean Society} 52, 377--393.
+
+\leavevmode\hypertarget{ref-r_core_team_r:_2019}{}%
+R Core Team (2019). \emph{R: A Language and Environment for Statistical
+Computing}. Vienna, Austria: R Foundation for Statistical Computing
+Available at: \url{http://www.R-project.org/}.
+
+\leavevmode\hypertarget{ref-sack_developmental_2016}{}%
+Sack, L., and Buckley, T. N. (2016). The developmental basis of stomatal
+density and flux. \emph{Plant Physiology}, pp.00476.2016.
+doi:\href{https://doi.org/10.1104/pp.16.00476}{10.1104/pp.16.00476}.
+
+\leavevmode\hypertarget{ref-sack_hydrology_2003}{}%
+Sack, L., Cowan, P. D., Jaikumar, N., and Holbrook, N. M. (2003). The
+'hydrology' of leaves: Co-ordination of structure and function in
+temperate woody species. \emph{Plant, Cell and Environment} 26,
+1343--1356.
+doi:\href{https://doi.org/10.1046/j.0016-8025.2003.01058.x}{10.1046/j.0016-8025.2003.01058.x}.
+
+\leavevmode\hypertarget{ref-salisbury_causes_1928}{}%
+Salisbury, E. J. (1928). On the Causes and Ecological Significance of
+Stomatal Frequency, with Special Reference to the Woodland Flora.
+\emph{Philosophical Transactions of the Royal Society B: Biological
+Sciences} 216, 1--65.
+doi:\href{https://doi.org/10.1098/rstb.1928.0001}{10.1098/rstb.1928.0001}.
+
+\leavevmode\hypertarget{ref-tateda_host_2019}{}%
+Tateda, C., Obara, K., Abe, Y., Sekine, R., Nekoduka, S., Hikage, T.,
+Nishihara, M., Sekine, K.-T., and Fujisaki, K. (2019). The Host Stomatal
+Density Determines Resistance to \emph{Septoria gentianae} in Japanese
+Gentian. \emph{Molecular Plant-Microbe Interactions} 32, 428--436.
+doi:\href{https://doi.org/10.1094/MPMI-05-18-0114-R}{10.1094/MPMI-05-18-0114-R}.
+
+\leavevmode\hypertarget{ref-ticha_photosynthetic_1982}{}%
+Tichá, I. (1982). Photosynthetic characteristics during ontogenesis of
+leaves 7. Stomata density and sizes. \emph{Photosynthetica} 16,
+375--471.
+
+\leavevmode\hypertarget{ref-underwood_role_2007}{}%
+Underwood, W., Melotto, M., and He, S. Y. (2007). Role of plant stomata
+in bacterial invasion. \emph{Cellular Microbiology} 9, 1621--1629.
+doi:\href{https://doi.org/10.1111/j.1462-5822.2007.00938.x}{10.1111/j.1462-5822.2007.00938.x}.
+
+\leavevmode\hypertarget{ref-weiss_untersuchungen_1865}{}%
+Weiss, A. (1865). Untersuchungen über die Zahlen- und
+Grössenverhältnisse der Spaltöffnungen. \emph{Jahrbücher für
+Wissenschaftliche Botanik} 4, 125--196.
+
+\leavevmode\hypertarget{ref-xie_r_2018}{}%
+Xie, Y., Allaire, J. J., and Grolemund, G. (2018). \emph{R Markdown: The
+definitive guide}. Boca Raton: Taylor \& Francis, CRC Press.
+
+\leavevmode\hypertarget{ref-zeng_plant_2010}{}%
+Zeng, W., Melotto, M., and He, S. Y. (2010). Plant stomata: A checkpoint
+of host immunity and pathogen virulence. \emph{Current Opinion in
+Biotechnology} 21, 599--603.
+doi:\href{https://doi.org/10.1016/j.copbio.2010.05.006}{10.1016/j.copbio.2010.05.006}.
+
+\end{document}

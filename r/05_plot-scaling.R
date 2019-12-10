@@ -53,4 +53,5 @@ fig4 <- ggplot(df, aes(D, S, group = p_colonize)) +
 
 fig4
 
+# ggsave("figures/fig4.jpeg", w = 6.5, h = 3, units = "in")
 ggsave("figures/fig4.pdf", w = 6.5, h = 3, units = "in")

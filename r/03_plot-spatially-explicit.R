@@ -56,4 +56,5 @@ f3b
 f3 <- plot_grid(f3a, f3b, labels = "auto", align = "hv", axis = "lr")
 
 plot_grid(l, f3, ncol = 1, rel_heights = c(0.1, 0.9))
+# ggsave("figures/fig3.jpeg", width = 6.5, height = 6.5, units = "in")
 ggsave("figures/fig3.pdf", width = 6.5, height = 6.5, units = "in")
