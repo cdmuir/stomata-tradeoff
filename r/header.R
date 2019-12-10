@@ -1,0 +1,26 @@
+rm(list = ls())
+graphics.off()
+
+# Libraries
+library(cowplot)
+library(dplyr)
+library(furrr)
+library(ggforce)
+library(ggimage)
+library(gginnards)
+library(ggplot2)
+library(glue)
+library(magrittr)
+library(pracma)
+library(purrr)
+library(readr)
+library(stringr)
+library(tikzDevice)
+library(tidyr)
+library(units)
+
+source("r/functions.R")
+source("r/functions-from-python.R")
+
+palette(colorRampPalette(c("tomato", "steelblue"), alpha = TRUE)(5))
+

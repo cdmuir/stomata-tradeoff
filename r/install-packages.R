@@ -1,0 +1,21 @@
+# Packages to generate manuscript
+install.packages("rmarkdown")
+install.packages("rticles")
+
+# Packages for running R scripts
+install.packages("cowplot")
+install.packages("dplyr")
+install.packages("furrr")
+install.packages("ggforce")
+install.packages("ggimage")
+install.packages("gginnards")
+install.packages("ggplot2")
+install.packages("glue")
+install.packages("magrittr")
+install.packages("pracma")
+install.packages("purrr")
+install.packages("readr")
+install.packages("stringr")
+install.packages("tikzDevice")
+install.packages("tidyr")
+install.packages("units")
