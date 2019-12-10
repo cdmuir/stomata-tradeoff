@@ -2,7 +2,7 @@
 
 [A stomatal model of tradeoffs between photosynthesis and pathogen defense](https://doi.org/10.1101/XXXXX). *bioRxiv*.
 
-This project was developed by [Chris Muir](https://www.cdmuir.netlify.com).
+This project was developed by [Chris Muir](https://cdmuir.netlify.com).
 
 More information about the study is available on [github](https://github.com/cdmuir/stomatal-tradeoff/blob/master/ms/ms.pdf).
 
