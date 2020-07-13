@@ -1,0 +1,576 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is just an example/guide for you to refer to when submitting manuscripts to Frontiers, it is not mandatory to use Frontiers .cls files nor frontiers.tex  %
+% This will only generate the Manuscript, the final article will be typeset by Frontiers after acceptance.
+%                                              %
+%                                                                                                                                                         %
+% When submitting your files, remember to upload this *tex file, the pdf generated with it, the *bib file (if bibliography is not within the *tex) and all the figures.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Version 3.4 Generated 2018/06/15 %%%
+%%% You will need to have the following packages installed: datetime, fmtcount, etoolbox, fcprefix, which are normally inlcuded in WinEdt. %%%
+%%% In http://www.ctan.org/ you can find the packages and how to install them, if necessary. %%%
+
+\documentclass[utf8]{frontiersSCNS}
+
+%\setcitestyle{square} % for Physics and Applied Mathematics and Statistics articles
+\usepackage{url,hyperref,lineno,microtype,subcaption}
+\usepackage[onehalfspacing]{setspace}
+
+\linenumbers
+
+
+% BELOW TAKEN FROM rticles plos template
+%
+% amsmath package, useful for mathematical formulas
+\usepackage{amsmath}
+% amssymb package, useful for mathematical symbols
+\usepackage{amssymb}
+
+% hyperref package, useful for hyperlinks
+\usepackage{hyperref}
+
+% graphicx package, useful for including eps and pdf graphics
+% include graphics with the command \includegraphics
+\usepackage{graphicx}
+
+% Sweave(-like)
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
+\newenvironment{Schunk}{}{}
+\DefineVerbatimEnvironment{Code}{Verbatim}{}
+\DefineVerbatimEnvironment{CodeInput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{}
+\newenvironment{CodeChunk}{}{}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+\usepackage{color}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Below is from frontiers
+%
+\bibliographystyle{frontiersinSCNS}
+% Use doublespacing - comment out for single spacing
+%\usepackage{setspace}
+%\doublespacing
+
+
+% Leave a blank line between paragraphs instead of using \\
+
+
+\def\keyFont{\fontsize{8}{11}\helveticabold }
+
+
+%% ** EDIT HERE **
+%% PLEASE INCLUDE ALL MACROS BELOW
+
+%% END MACROS SECTION
+
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{soul}
+\usepackage{tikz}
+
+% short-cut for fs, gmax, and gop
+\newcommand{\fs}{$f_\text{S}$}
+\newcommand{\gsmax}{$g_\text{s,max}$}
+\newcommand{\gsop}{$g_\text{s,op}$}
+
+
+\def\Authors{
+  Christopher D. Muir\,\textsuperscript{1*}}
+
+\def\Address{
+
+  \textsuperscript{1} School of Life Sciences, University of Hawaii,  Honolulu,  Hawaii,  USA
+  }
+
+  \def\corrAuthor{Christopher D. Muir}\def\corrAddress{,  }\def\corrEmail{\href{mailto:cdmuir@hawaii.edu}{\nolinkurl{cdmuir@hawaii.edu}}}
+  \def\firstAuthorLast{Muir {et~al.}}
+
+
+\begin{document}
+\onecolumn
+\firstpage{1}
+
+\title[]{Appendix 2: Additional R packages}
+\author[\firstAuthorLast]{\Authors}
+\address{} %This field will be automatically populated
+\correspondance{} %This field will be automatically populated
+
+\extraAuth{}% If there are more than 1 corresponding author, comment this line and uncomment the next one.
+%\extraAuth{corresponding Author2 \\ Laboratory X2, Institute X2, Department X2, Organization X2, Street X2, City X2 , State XX2 (only USA, Canada and Australia), Zip Code2, X2 Country X2, email2@uni2.edu}
+
+
+\maketitle
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+package & version & reference\tabularnewline
+\midrule
+\endhead
+assertthat & 0.2.1 & Wickham (2019a)\tabularnewline
+bibtex & 0.4.2.2 & Francois (2020)\tabularnewline
+BiocManager & 1.30.10 & Morgan (2019)\tabularnewline
+cli & 2.0.2 & Cs\a'ardi (2020)\tabularnewline
+codetools & 0.2-16 & Tierney (2018)\tabularnewline
+colorspace & 1.4-1 & Zeileis et al. (2019)\tabularnewline
+& & Zeileis et al. (2009)\tabularnewline
+& & Stauffer et al. (2009)\tabularnewline
+cowplot & 1.0.0 & Wilke (2019)\tabularnewline
+crayon & 1.3.4 & Cs\a'ardi (2017)\tabularnewline
+digest & 0.6.25 & Antoine Lucas et al. (2020)\tabularnewline
+dplyr & 1.0.0 & Wickham et al. (2020a)\tabularnewline
+ellipsis & 0.3.1 & Wickham (2020)\tabularnewline
+evaluate & 0.14 & Wickham and Xie (2019)\tabularnewline
+fansi & 0.4.1 & Gaslam (2020)\tabularnewline
+farver & 2.0.3 & Pedersen et al. (2020)\tabularnewline
+filehash & 2.4-2 & Peng (2006)\tabularnewline
+furrr & 0.1.0 & Vaughan and Dancho (2018)\tabularnewline
+future & 1.18.0 & Bengtsson (2020)\tabularnewline
+generics & 0.0.2 & Kuhn et al. (2018)\tabularnewline
+ggforce & 0.3.2 & Pedersen (2020)\tabularnewline
+ggimage & 0.2.8 & Yu (2020a)\tabularnewline
+gginnards & 0.0.3 & Aphalo (2019)\tabularnewline
+ggplot2 & 3.3.2 & Wickham (2016)\tabularnewline
+ggplotify & 0.0.5 & Yu (2020b)\tabularnewline
+globals & 0.12.5 & Bengtsson (2019a)\tabularnewline
+glue & 1.4.1 & Hester (2020)\tabularnewline
+gridGraphics & 0.5-0 & Murrell and Wen (2020)\tabularnewline
+gtable & 0.3.0 & Wickham and Pedersen (2019)\tabularnewline
+hms & 0.5.3 & Müller (2020)\tabularnewline
+htmltools & 0.5.0 & Cheng et al. (2020)\tabularnewline
+httr & 1.4.1 & Wickham (2019b)\tabularnewline
+jsonlite & 1.7.0 & Ooms (2014)\tabularnewline
+knitcitations & 1.0.10 & Boettiger (2019)\tabularnewline
+knitr & 1.29 & Xie (2020a)\tabularnewline
+& & Xie (2015)\tabularnewline
+& & Xie (2014)\tabularnewline
+lifecycle & 0.2.0 & Henry (2020)\tabularnewline
+listenv & 0.8.0 & Bengtsson (2019b)\tabularnewline
+lubridate & 1.7.9 & Grolemund and Wickham (2011)\tabularnewline
+magick & 2.4.0 & Ooms (2020)\tabularnewline
+magrittr & 1.5 & Bache and Wickham (2014)\tabularnewline
+MASS & 7.3-51.6 & Venables and Ripley (2002)\tabularnewline
+munsell & 0.5.0 & Wickham (2018)\tabularnewline
+pillar & 1.4.6 & Müller and Wickham (2020a)\tabularnewline
+pkgconfig & 2.0.3 & Cs\a'ardi (2019)\tabularnewline
+plyr & 1.8.6 & Wickham (2011)\tabularnewline
+polyclip & 1.10-0 & Johnson and Baddeley (2019)\tabularnewline
+pracma & 2.2.9 & Borchers (2019)\tabularnewline
+purrr & 0.3.4 & Henry and Wickham (2020a)\tabularnewline
+R6 & 2.4.1 & Chang (2019)\tabularnewline
+Rcpp & 1.0.5 & Eddelbuettel and François (2011)\tabularnewline
+& & Eddelbuettel (2013)\tabularnewline
+& & Eddelbuettel and Balamuta (2017)\tabularnewline
+readr & 1.3.1 & Wickham et al. (2018)\tabularnewline
+RefManageR & 1.2.12 & McLean (2017)\tabularnewline
+& & McLean (2014)\tabularnewline
+rlang & 0.4.7 & Henry and Wickham (2020b)\tabularnewline
+rmarkdown & 2.3 & Allaire et al. (2020a)\tabularnewline
+& & Xie et al. (2018)\tabularnewline
+rticles & 0.14 & Allaire et al. (2020b)\tabularnewline
+rvcheck & 0.1.8 & Yu (2020c)\tabularnewline
+scales & 1.1.1 & Wickham and Seidel (2020)\tabularnewline
+sessioninfo & 1.1.1 & Cs\a'ardi et al. (2018)\tabularnewline
+stringi & 1.4.6 & Gagolewski (2020)\tabularnewline
+stringr & 1.4.0 & Wickham (2019c)\tabularnewline
+tibble & 3.0.3 & Müller and Wickham (2020b)\tabularnewline
+tidyr & 1.1.0 & Wickham and Henry (2020)\tabularnewline
+tidyselect & 1.1.0 & Henry and Wickham (2020c)\tabularnewline
+tikzDevice & 0.12.3.1 & Sharpsteen and Bracken (2020)\tabularnewline
+tweenr & 1.0.1 & Pedersen (2018)\tabularnewline
+units & 0.6-7 & Pebesma et al. (2016)\tabularnewline
+vctrs & 0.3.1 & Wickham et al. (2020b)\tabularnewline
+withr & 2.2.0 & Hester et al. (2020)\tabularnewline
+xfun & 0.15 & Xie (2020b)\tabularnewline
+xml2 & 1.3.2 & Wickham et al. (2020c)\tabularnewline
+yaml & 2.2.1 & Stephens et al. (2020)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-allaire2020rmarkdown}{}%
+Allaire, J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins,
+A., Wickham, H., Cheng, J., Chang, W., and Iannone, R. (2020a).
+\emph{Rmarkdown: Dynamic documents for r}. Available at:
+\url{https://github.com/rstudio/rmarkdown}.
+
+\leavevmode\hypertarget{ref-allaire2020rticles}{}%
+Allaire, J., Xie, Y., R Foundation, Wickham, H., Journal of Statistical
+Software, Vaidyanathan, R., Association for Computing Machinery,
+Boettiger, C., Elsevier, Broman, K., et al. (2020b). \emph{Rticles:
+Article formats for r markdown}. Available at:
+\url{https://CRAN.R-project.org/package=rticles}.
+
+\leavevmode\hypertarget{ref-lucas2020digest}{}%
+Antoine Lucas, D. E. with contributions by, Tuszynski, J., Bengtsson,
+H., Urbanek, S., Frasca, M., Lewis, B., Stokely, M., Muehleisen, H.,
+Murdoch, D., Hester, J., et al. (2020). \emph{Digest: Create compact
+hash digests of r objects}. Available at:
+\url{https://CRAN.R-project.org/package=digest}.
+
+\leavevmode\hypertarget{ref-aphalo2019gginnards}{}%
+Aphalo, P. J. (2019). \emph{Gginnards: Explore the innards of 'ggplot2'
+objects}. Available at:
+\url{https://CRAN.R-project.org/package=gginnards}.
+
+\leavevmode\hypertarget{ref-bache2014magrittr}{}%
+Bache, S. M., and Wickham, H. (2014). \emph{Magrittr: A forward-pipe
+operator for r}. Available at:
+\url{https://CRAN.R-project.org/package=magrittr}.
+
+\leavevmode\hypertarget{ref-bengtsson2020future}{}%
+Bengtsson, H. (2020). \emph{Future: Unified parallel and distributed
+processing in r for everyone}. Available at:
+\url{https://CRAN.R-project.org/package=future}.
+
+\leavevmode\hypertarget{ref-bengtsson2019globals}{}%
+Bengtsson, H. (2019a). \emph{Globals: Identify global objects in r
+expressions}. Available at:
+\url{https://CRAN.R-project.org/package=globals}.
+
+\leavevmode\hypertarget{ref-bengtsson2019listenv}{}%
+Bengtsson, H. (2019b). \emph{Listenv: Environments behaving (almost) as
+lists}. Available at: \url{https://CRAN.R-project.org/package=listenv}.
+
+\leavevmode\hypertarget{ref-boettiger2019knitcitations}{}%
+Boettiger, C. (2019). \emph{Knitcitations: Citations for 'knitr'
+markdown files}. Available at:
+\url{https://CRAN.R-project.org/package=knitcitations}.
+
+\leavevmode\hypertarget{ref-borchers2019pracma}{}%
+Borchers, H. W. (2019). \emph{Pracma: Practical numerical math
+functions}. Available at:
+\url{https://CRAN.R-project.org/package=pracma}.
+
+\leavevmode\hypertarget{ref-chang2019encapsulated}{}%
+Chang, W. (2019). \emph{R6: Encapsulated classes with reference
+semantics}. Available at: \url{https://CRAN.R-project.org/package=R6}.
+
+\leavevmode\hypertarget{ref-cheng2020htmltools}{}%
+Cheng, J., Sievert, C., Chang, W., Xie, Y., and Allen, J. (2020).
+\emph{Htmltools: Tools for html}. Available at:
+\url{https://CRAN.R-project.org/package=htmltools}.
+
+\leavevmode\hypertarget{ref-csrdi2020helpers}{}%
+Cs\a'ardi, G. (2020). \emph{Cli: Helpers for developing command line
+interfaces}. Available at: \url{https://CRAN.R-project.org/package=cli}.
+
+\leavevmode\hypertarget{ref-csrdi2017crayon}{}%
+Cs\a'ardi, G. (2017). \emph{Crayon: Colored terminal output}. Available
+at: \url{https://CRAN.R-project.org/package=crayon}.
+
+\leavevmode\hypertarget{ref-csrdi2019pkgconfig}{}%
+Cs\a'ardi, G. (2019). \emph{Pkgconfig: Private configuration for 'r'
+packages}. Available at:
+\url{https://CRAN.R-project.org/package=pkgconfig}.
+
+\leavevmode\hypertarget{ref-csrdi2018sessioninfo}{}%
+Cs\a'ardi, G., core, R., Wickham, H., Chang, W., Flight, R. M., Müller,
+K., and Hester, J. (2018). \emph{Sessioninfo: R session information}.
+Available at: \url{https://CRAN.R-project.org/package=sessioninfo}.
+
+\leavevmode\hypertarget{ref-eddelbuettel2013seamless}{}%
+Eddelbuettel, D. (2013). \emph{Seamless R and C++ integration with
+Rcpp}. New York: Springer
+doi:\href{https://doi.org/10.1007/978-1-4614-6868-4}{10.1007/978-1-4614-6868-4}.
+
+\leavevmode\hypertarget{ref-eddelbuettel2017extending}{}%
+Eddelbuettel, D., and Balamuta, J. J. (2017). Extending extitR with
+extitC++: A Brief Introduction to extitRcpp. \emph{PeerJ Preprints} 5,
+e3188v1.
+doi:\href{https://doi.org/10.7287/peerj.preprints.3188v1}{10.7287/peerj.preprints.3188v1}.
+
+\leavevmode\hypertarget{ref-eddelbuettel2011rcpp}{}%
+Eddelbuettel, D., and François, R. (2011). Rcpp: Seamless R and C++
+integration. \emph{Journal of Statistical Software} 40, 1--18.
+doi:\href{https://doi.org/10.18637/jss.v040.i08}{10.18637/jss.v040.i08}.
+
+\leavevmode\hypertarget{ref-francois2020bibtex}{}%
+Francois, R. (2020). \emph{Bibtex: Bibtex parser}. Available at:
+\url{https://CRAN.R-project.org/package=bibtex}.
+
+\leavevmode\hypertarget{ref-gagolewski2020package}{}%
+Gagolewski, M. (2020). \emph{R package stringi: Character string
+processing facilities}. Available at:
+\url{http://www.gagolewski.com/software/stringi/}.
+
+\leavevmode\hypertarget{ref-gaslam2020fansi}{}%
+Gaslam, B. (2020). \emph{Fansi: ANSI control sequence aware string
+functions}. Available at:
+\url{https://CRAN.R-project.org/package=fansi}.
+
+\leavevmode\hypertarget{ref-grolemund2011dates}{}%
+Grolemund, G., and Wickham, H. (2011). Dates and times made easy with
+lubridate. \emph{Journal of Statistical Software} 40, 1--25. Available
+at: \url{http://www.jstatsoft.org/v40/i03/}.
+
+\leavevmode\hypertarget{ref-henry2020lifecycle}{}%
+Henry, L. (2020). \emph{Lifecycle: Manage the life cycle of your package
+functions}. Available at:
+\url{https://CRAN.R-project.org/package=lifecycle}.
+
+\leavevmode\hypertarget{ref-henry2020purrr}{}%
+Henry, L., and Wickham, H. (2020a). \emph{Purrr: Functional programming
+tools}. Available at: \url{https://CRAN.R-project.org/package=purrr}.
+
+\leavevmode\hypertarget{ref-henry2020rlang}{}%
+Henry, L., and Wickham, H. (2020b). \emph{Rlang: Functions for base
+types and core r and 'tidyverse' features}. Available at:
+\url{https://CRAN.R-project.org/package=rlang}.
+
+\leavevmode\hypertarget{ref-henry2020tidyselect}{}%
+Henry, L., and Wickham, H. (2020c). \emph{Tidyselect: Select from a set
+of strings}. Available at:
+\url{https://CRAN.R-project.org/package=tidyselect}.
+
+\leavevmode\hypertarget{ref-hester2020glue}{}%
+Hester, J. (2020). \emph{Glue: Interpreted string literals}. Available
+at: \url{https://CRAN.R-project.org/package=glue}.
+
+\leavevmode\hypertarget{ref-hester2020withr}{}%
+Hester, J., Müller, K., Ushey, K., Wickham, H., and Chang, W. (2020).
+\emph{Withr: Run code 'with' temporarily modified global state}.
+Available at: \url{https://CRAN.R-project.org/package=withr}.
+
+\leavevmode\hypertarget{ref-johnson2019polyclip}{}%
+Johnson, A., and Baddeley, A. (2019). \emph{Polyclip: Polygon clipping}.
+Available at: \url{https://CRAN.R-project.org/package=polyclip}.
+
+\leavevmode\hypertarget{ref-kuhn2018generics}{}%
+Kuhn, M., Wickham, H., and Vaughan, D. (2018). \emph{Generics: Common s3
+generics not provided by base r methods related to model fitting}.
+Available at: \url{https://CRAN.R-project.org/package=generics}.
+
+\leavevmode\hypertarget{ref-mclean2017refmanager}{}%
+McLean, M. W. (2017). RefManageR: Import and manage bibtex and biblatex
+references in r. \emph{The Journal of Open Source Software}.
+doi:\href{https://doi.org/10.21105/joss.00338}{10.21105/joss.00338}.
+
+\leavevmode\hypertarget{ref-mclean2014straightforward}{}%
+McLean, M. W. (2014). \emph{Straightforward bibliography management in r
+using the refmanager package}. Available at:
+\url{https://arxiv.org/abs/1403.2036}.
+
+\leavevmode\hypertarget{ref-morgan2019biocmanager}{}%
+Morgan, M. (2019). \emph{BiocManager: Access the bioconductor project
+package repository}. Available at:
+\url{https://CRAN.R-project.org/package=BiocManager}.
+
+\leavevmode\hypertarget{ref-murrell2020gridgraphics}{}%
+Murrell, P., and Wen, Z. (2020). \emph{GridGraphics: Redraw base
+graphics using 'grid' graphics}. Available at:
+\url{https://CRAN.R-project.org/package=gridGraphics}.
+
+\leavevmode\hypertarget{ref-mller2020pretty}{}%
+Müller, K. (2020). \emph{Hms: Pretty time of day}. Available at:
+\url{https://CRAN.R-project.org/package=hms}.
+
+\leavevmode\hypertarget{ref-mller2020pillar}{}%
+Müller, K., and Wickham, H. (2020a). \emph{Pillar: Coloured formatting
+for columns}. Available at:
+\url{https://CRAN.R-project.org/package=pillar}.
+
+\leavevmode\hypertarget{ref-mller2020tibble}{}%
+Müller, K., and Wickham, H. (2020b). \emph{Tibble: Simple data frames}.
+Available at: \url{https://CRAN.R-project.org/package=tibble}.
+
+\leavevmode\hypertarget{ref-ooms2020magick}{}%
+Ooms, J. (2020). \emph{Magick: Advanced graphics and image-processing in
+r}. Available at: \url{https://CRAN.R-project.org/package=magick}.
+
+\leavevmode\hypertarget{ref-ooms2014jsonlite}{}%
+Ooms, J. (2014). The jsonlite package: A practical and consistent
+mapping between json data and r objects. \emph{arXiv:1403.2805
+{[}stat.CO{]}}. Available at: \url{https://arxiv.org/abs/1403.2805}.
+
+\leavevmode\hypertarget{ref-pebesma2016measurement}{}%
+Pebesma, E., Mailund, T., and Hiebert, J. (2016). Measurement units in
+R. \emph{R Journal} 8, 486--494.
+doi:\href{https://doi.org/10.32614/RJ-2016-061}{10.32614/RJ-2016-061}.
+
+\leavevmode\hypertarget{ref-pedersen2020ggforce}{}%
+Pedersen, T. L. (2020). \emph{Ggforce: Accelerating 'ggplot2'}.
+Available at: \url{https://CRAN.R-project.org/package=ggforce}.
+
+\leavevmode\hypertarget{ref-pedersen2018tweenr}{}%
+Pedersen, T. L. (2018). \emph{Tweenr: Interpolate data for smooth
+animations}. Available at:
+\url{https://CRAN.R-project.org/package=tweenr}.
+
+\leavevmode\hypertarget{ref-pedersen2020farver}{}%
+Pedersen, T. L., Nicolae, B., and François, R. (2020). \emph{Farver:
+High performance colour space manipulation}. Available at:
+\url{https://CRAN.R-project.org/package=farver}.
+
+\leavevmode\hypertarget{ref-peng2006interacting}{}%
+Peng, R. D. (2006). Interacting with data using the filehash package.
+\emph{R News} 6, 19--24. Available at:
+\url{https://cran.r-project.org/doc/Rnews/}.
+
+\leavevmode\hypertarget{ref-sharpsteen2020tikzdevice}{}%
+Sharpsteen, C., and Bracken, C. (2020). \emph{TikzDevice: R graphics
+output in latex format}. Available at:
+\url{https://CRAN.R-project.org/package=tikzDevice}.
+
+\leavevmode\hypertarget{ref-stauffer2009somewhere}{}%
+Stauffer, R., Mayr, G. J., Dabernig, M., and Zeileis, A. (2009).
+Somewhere over the rainbow: How to make effective use of colors in
+meteorological visualizations. \emph{Bulletin of the American
+Meteorological Society} 96, 203--216.
+doi:\href{https://doi.org/10.1175/BAMS-D-13-00155.1}{10.1175/BAMS-D-13-00155.1}.
+
+\leavevmode\hypertarget{ref-stephens2020yaml}{}%
+Stephens, J., Simonov, K., Xie, Y., Dong, Z., Wickham, H., Horner, J.,
+reikoch, Beasley, W., O'Connor, B., and Warnes, G. R. (2020).
+\emph{Yaml: Methods to convert r data to yaml and back}. Available at:
+\url{https://CRAN.R-project.org/package=yaml}.
+
+\leavevmode\hypertarget{ref-tierney2018codetools}{}%
+Tierney, L. (2018). \emph{Codetools: Code analysis tools for r}.
+Available at: \url{https://CRAN.R-project.org/package=codetools}.
+
+\leavevmode\hypertarget{ref-vaughan2018furrr}{}%
+Vaughan, D., and Dancho, M. (2018). \emph{Furrr: Apply mapping functions
+in parallel using futures}. Available at:
+\url{https://CRAN.R-project.org/package=furrr}.
+
+\leavevmode\hypertarget{ref-venables2002modern}{}%
+Venables, W. N., and Ripley, B. D. (2002). \emph{Modern applied
+statistics with s}. Fourth. New York: Springer Available at:
+\url{http://www.stats.ox.ac.uk/pub/MASS4}.
+
+\leavevmode\hypertarget{ref-wickham2018munsell}{}%
+Wickham, C. (2018). \emph{Munsell: Utilities for using munsell colours}.
+Available at: \url{https://CRAN.R-project.org/package=munsell}.
+
+\leavevmode\hypertarget{ref-wickham2019assertthat}{}%
+Wickham, H. (2019a). \emph{Assertthat: Easy pre and post assertions}.
+Available at: \url{https://CRAN.R-project.org/package=assertthat}.
+
+\leavevmode\hypertarget{ref-wickham2020ellipsis}{}%
+Wickham, H. (2020). \emph{Ellipsis: Tools for working with ...}
+Available at: \url{https://CRAN.R-project.org/package=ellipsis}.
+
+\leavevmode\hypertarget{ref-wickham2016ggplot2}{}%
+Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}.
+Springer-Verlag New York Available at:
+\url{https://ggplot2.tidyverse.org}.
+
+\leavevmode\hypertarget{ref-wickham2019httr}{}%
+Wickham, H. (2019b). \emph{Httr: Tools for working with urls and http}.
+Available at: \url{https://CRAN.R-project.org/package=httr}.
+
+\leavevmode\hypertarget{ref-wickham2019stringr}{}%
+Wickham, H. (2019c). \emph{Stringr: Simple, consistent wrappers for
+common string operations}. Available at:
+\url{https://CRAN.R-project.org/package=stringr}.
+
+\leavevmode\hypertarget{ref-wickham2011split}{}%
+Wickham, H. (2011). The split-apply-combine strategy for data analysis.
+\emph{Journal of Statistical Software} 40, 1--29. Available at:
+\url{http://www.jstatsoft.org/v40/i01/}.
+
+\leavevmode\hypertarget{ref-wickham2020dplyr}{}%
+Wickham, H., François, R., Henry, L., and Müller, K. (2020a).
+\emph{Dplyr: A grammar of data manipulation}. Available at:
+\url{https://CRAN.R-project.org/package=dplyr}.
+
+\leavevmode\hypertarget{ref-wickham2020tidyr}{}%
+Wickham, H., and Henry, L. (2020). \emph{Tidyr: Tidy messy data}.
+Available at: \url{https://CRAN.R-project.org/package=tidyr}.
+
+\leavevmode\hypertarget{ref-wickham2020vctrs}{}%
+Wickham, H., Henry, L., and Vaughan, D. (2020b). \emph{Vctrs: Vector
+helpers}. Available at: \url{https://CRAN.R-project.org/package=vctrs}.
+
+\leavevmode\hypertarget{ref-wickham2018readr}{}%
+Wickham, H., Hester, J., and Francois, R. (2018). \emph{Readr: Read
+rectangular text data}. Available at:
+\url{https://CRAN.R-project.org/package=readr}.
+
+\leavevmode\hypertarget{ref-wickham2020xml2}{}%
+Wickham, H., Hester, J., and Ooms, J. (2020c). \emph{Xml2: Parse xml}.
+Available at: \url{https://CRAN.R-project.org/package=xml2}.
+
+\leavevmode\hypertarget{ref-wickham2019gtable}{}%
+Wickham, H., and Pedersen, T. L. (2019). \emph{Gtable: Arrange 'grobs'
+in tables}. Available at:
+\url{https://CRAN.R-project.org/package=gtable}.
+
+\leavevmode\hypertarget{ref-wickham2020scales}{}%
+Wickham, H., and Seidel, D. (2020). \emph{Scales: Scale functions for
+visualization}. Available at:
+\url{https://CRAN.R-project.org/package=scales}.
+
+\leavevmode\hypertarget{ref-wickham2019evaluate}{}%
+Wickham, H., and Xie, Y. (2019). \emph{Evaluate: Parsing and evaluation
+tools that provide more details than the default}. Available at:
+\url{https://CRAN.R-project.org/package=evaluate}.
+
+\leavevmode\hypertarget{ref-wilke2019cowplot}{}%
+Wilke, C. O. (2019). \emph{Cowplot: Streamlined plot theme and plot
+annotations for 'ggplot2'}. Available at:
+\url{https://CRAN.R-project.org/package=cowplot}.
+
+\leavevmode\hypertarget{ref-xie2015dynamic}{}%
+Xie, Y. (2015). \emph{Dynamic documents with R and knitr}. 2nd ed. Boca
+Raton, Florida: Chapman; Hall/CRC Available at:
+\url{https://yihui.org/knitr/}.
+
+\leavevmode\hypertarget{ref-xie2014knitr}{}%
+Xie, Y. (2014). ``Knitr: A comprehensive tool for reproducible research
+in R,'' in \emph{Implementing reproducible computational research}, eds.
+V. Stodden, F. Leisch, and R. D. Peng (Chapman; Hall/CRC). Available at:
+\url{http://www.crcpress.com/product/isbn/9781466561595}.
+
+\leavevmode\hypertarget{ref-xie2020knitr}{}%
+Xie, Y. (2020a). \emph{Knitr: A general-purpose package for dynamic
+report generation in r}. Available at: \url{https://yihui.org/knitr/}.
+
+\leavevmode\hypertarget{ref-xie2020xfun}{}%
+Xie, Y. (2020b). \emph{Xfun: Miscellaneous functions by 'yihui xie'}.
+Available at: \url{https://CRAN.R-project.org/package=xfun}.
+
+\leavevmode\hypertarget{ref-xie2018markdown}{}%
+Xie, Y., Allaire, J. J., and Grolemund, G. (2018). \emph{R markdown: The
+definitive guide}. Boca Raton, Florida: Chapman; Hall/CRC Available at:
+\url{https://bookdown.org/yihui/rmarkdown}.
+
+\leavevmode\hypertarget{ref-yu2020ggimage}{}%
+Yu, G. (2020a). \emph{Ggimage: Use image in 'ggplot2'}. Available at:
+\url{https://CRAN.R-project.org/package=ggimage}.
+
+\leavevmode\hypertarget{ref-yu2020ggplotify}{}%
+Yu, G. (2020b). \emph{Ggplotify: Convert plot to 'grob' or 'ggplot'
+object}. Available at:
+\url{https://CRAN.R-project.org/package=ggplotify}.
+
+\leavevmode\hypertarget{ref-yu2020rvcheck}{}%
+Yu, G. (2020c). \emph{Rvcheck: R/package version check}. Available at:
+\url{https://CRAN.R-project.org/package=rvcheck}.
+
+\leavevmode\hypertarget{ref-zeileis2019colorspace}{}%
+Zeileis, A., Fisher, J. C., Hornik, K., Ihaka, R., McWhite, C. D.,
+Murrell, P., Stauffer, R., and Wilke, C. O. (2019). colorspace: A
+toolbox for manipulating and assessing colors and palettes. arXiv.org
+E-Print Archive Available at: \url{http://arxiv.org/abs/1903.06490}.
+
+\leavevmode\hypertarget{ref-zeileis2009escaping}{}%
+Zeileis, A., Hornik, K., and Murrell, P. (2009). Escaping RGBland:
+Selecting colors for statistical graphics. \emph{Computational
+Statistics \& Data Analysis} 53, 3259--3270.
+doi:\href{https://doi.org/10.1016/j.csda.2008.11.033}{10.1016/j.csda.2008.11.033}.
+
+\end{document}

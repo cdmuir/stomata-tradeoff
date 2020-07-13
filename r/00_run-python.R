@@ -24,3 +24,9 @@ get_tangent_points <-
      }}", x1 = x1, x2 = x2, y1 = y1, y2 = y2) 
 
 cat(get_tangent_slopes, "\n", get_tangent_points, file = "r/functions-from-python.R")
+
+
+library(glue)
+library(reticulate)
+# use_python('/anaconda3/bin/python', required = TRUE)
+source_python("python/spatially-implicit-model.py")

@@ -23,4 +23,3 @@ source("r/functions.R")
 source("r/functions-from-python.R")
 
 palette(colorRampPalette(c("tomato", "steelblue"), alpha = TRUE)(5))
-
