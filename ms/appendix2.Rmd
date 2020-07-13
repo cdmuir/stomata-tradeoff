@@ -1,0 +1,40 @@
+---
+title: "Appendix 2: Additional R packages"
+documentclass: frontiersSCNS
+author:
+  - name: Christopher D. Muir
+    affiliation: '1'
+    etal: Muir
+    email: cdmuir@hawaii.edu
+affiliation:
+  - id: '1'
+    department: School of Life Sciences
+    institution: University of Hawaii
+    city: Honolulu
+    state: Hawaii
+    country: USA
+output: 
+  rticles::frontiers_article:
+    includes:
+      in_header: header.tex
+csl: frontiers.csl
+bibliography: appendix.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+knitr::opts_knit$set(root.dir = "..")
+```
+
+```{r}
+make_appendix <- FALSE
+
+source("r/07_make-appendix2.R")
+
+r_package_table %>%
+  select(package, version, reference = key) %>%
+  knitr::kable()
+
+```
+
+# References {-}

@@ -35,14 +35,14 @@ U2D <- function(U) {
 S2R <- function(S) {
   
   # S must be in units of um ^ 2
-  sqrt(S / (2 * pi)) # units of um
+  sqrt(S / pi) # units of um
   
 }
 
 R2S <- function(R) {
   
   # r must be in units of um
-  2 * pi * R ^ 2 # units of um ^ 2
+  pi * R ^ 2 # units of um ^ 2
   
 }
 
