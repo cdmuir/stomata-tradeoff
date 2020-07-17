@@ -23,7 +23,7 @@ df_stomata <- data.frame(
 xy <- combn(nrow(df_stomata), 2)
 df_grid <- bind_cols(
   df_stomata[xy[1,], ],
-  df_stomata[xy[2,], ]
+  select(df_stomata[xy[2,], ], x1 = x, y1 = y)
 ) %>%
   mutate(d = sqrt((x1 - x) ^ 2 + (y1 - y) ^ 2)) %>%
   filter(abs(d - s1) < 1e-6)
