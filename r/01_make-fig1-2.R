@@ -212,8 +212,8 @@ fig2a <- pD %>%
     mapping = aes(label = label),
     hjust = 0.5, vjust = 0, nudge_x = 0, nudge_y = -2.75 * R
   ) +
-  scale_x_continuous(expand = expand_scale(mult = 0.125)) +
-  scale_y_continuous(expand = expand_scale(mult = 0.125)) +
+  scale_x_continuous(expand = expansion(mult = 0.125)) +
+  scale_y_continuous(expand = expansion(mult = 0.125)) +
   geom_circle(
     data = df_stomata,
     mapping = aes(x0 = x, y0 = y, r = R),
