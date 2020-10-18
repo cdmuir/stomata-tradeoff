@@ -149,7 +149,6 @@ get_theta <- function(x_p, y_p, x_i, y_i, R) {
 # Probability of locating stomate at starting position x_p, y_p
 plocate_xy <- function(x_p, y_p, R, U, H) {
   
-  # params <- list(...)
   x_c <- c(0, U / 2, U)
   y_c <- c(0, sqrt(3) / 2 * U, 0)
   ymin <- get_ymin(x_p, R, U)

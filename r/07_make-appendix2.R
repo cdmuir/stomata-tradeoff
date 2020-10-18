@@ -1,8 +1,5 @@
 source("r/header.R")
 
-library(knitcitations)
-library(RefManageR)
-library(sessioninfo)
 si <- session_info(include_base = FALSE)
 
 r_package_table <- map2_dfr(si$packages$package, si$packages$loadedversion, ~ {

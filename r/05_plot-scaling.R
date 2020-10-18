@@ -128,5 +128,5 @@ figS3 <- ggplot(df, aes(D, S, group = p_colonize)) +
 figS3
 
 # ggsave("figures/figS3.jpeg", w = 4.5, h = 4, units = "in")
-ggsave("figures/figS3.pdf", w = 4.5, h = 4, units = "in")
+ggsave("figures/figS3.pdf", w = 5.5, h = 4, units = "in")
 
