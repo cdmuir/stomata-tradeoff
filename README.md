@@ -45,6 +45,8 @@ rmarkdown::render(
 You can re-run all analyses, figures, etc. using [GNU make](https://www.gnu.org/software/make/). Type `make --version` in a terminal/shell to see if it is already installed.
 
 ```
+# Clear out previously saved output
+make cleanall
 # This will take several minutes to run
-make -all
+make
 ```
