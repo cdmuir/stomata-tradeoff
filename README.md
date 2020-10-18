@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/226997664.svg)](https://zenodo.org/badge/latestdoi/226997664)
+
 # stomatal-tradeoff
 
 This repository contains source code associated with the manuscript:
